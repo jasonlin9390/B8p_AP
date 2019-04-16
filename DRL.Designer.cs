@@ -29,18 +29,23 @@
         private void InitializeComponent()
         {
             this.gbGeneral = new System.Windows.Forms.GroupBox();
+            this.btnSet = new System.Windows.Forms.Button();
+            this.btnLoad = new System.Windows.Forms.Button();
+            this.btnDeleteAll = new System.Windows.Forms.Button();
             this.gbDRL1 = new System.Windows.Forms.GroupBox();
-            this.tbProgramID1 = new System.Windows.Forms.TextBox();
-            this.cbStatusCheck1 = new System.Windows.Forms.CheckBox();
-            this.cbZeroCheck1 = new System.Windows.Forms.CheckBox();
-            this.cbbOption1 = new System.Windows.Forms.ComboBox();
-            this.cbRCTL1 = new System.Windows.Forms.CheckBox();
-            this.cbCVMCheck1 = new System.Windows.Forms.CheckBox();
-            this.cbRCFLCheck1 = new System.Windows.Forms.CheckBox();
-            this.tbRCTL1 = new System.Windows.Forms.TextBox();
-            this.tbCVML1 = new System.Windows.Forms.TextBox();
+            this.lbProgramID1 = new System.Windows.Forms.Label();
             this.tbRCFL1 = new System.Windows.Forms.TextBox();
+            this.tbCVML1 = new System.Windows.Forms.TextBox();
+            this.tbRCTL1 = new System.Windows.Forms.TextBox();
+            this.cbRCFLCheck1 = new System.Windows.Forms.CheckBox();
+            this.cbCVMCheck1 = new System.Windows.Forms.CheckBox();
+            this.cbRCTL1 = new System.Windows.Forms.CheckBox();
+            this.cbbOption1 = new System.Windows.Forms.ComboBox();
+            this.cbZeroCheck1 = new System.Windows.Forms.CheckBox();
+            this.cbStatusCheck1 = new System.Windows.Forms.CheckBox();
+            this.tbProgramID1 = new System.Windows.Forms.TextBox();
             this.gbDRL2 = new System.Windows.Forms.GroupBox();
+            this.lbProgramID2 = new System.Windows.Forms.Label();
             this.tbRCFL2 = new System.Windows.Forms.TextBox();
             this.tbCVML2 = new System.Windows.Forms.TextBox();
             this.tbRCTL2 = new System.Windows.Forms.TextBox();
@@ -52,6 +57,7 @@
             this.cbStatusCheck2 = new System.Windows.Forms.CheckBox();
             this.tbProgramID2 = new System.Windows.Forms.TextBox();
             this.gbDRL3 = new System.Windows.Forms.GroupBox();
+            this.lbProgramID3 = new System.Windows.Forms.Label();
             this.tbRCFL3 = new System.Windows.Forms.TextBox();
             this.tbCVML3 = new System.Windows.Forms.TextBox();
             this.tbRCTL3 = new System.Windows.Forms.TextBox();
@@ -63,6 +69,7 @@
             this.cbStatusCheck3 = new System.Windows.Forms.CheckBox();
             this.tbProgramID3 = new System.Windows.Forms.TextBox();
             this.gbDRL4 = new System.Windows.Forms.GroupBox();
+            this.lbProgramID4 = new System.Windows.Forms.Label();
             this.tbRCFL4 = new System.Windows.Forms.TextBox();
             this.tbCVML4 = new System.Windows.Forms.TextBox();
             this.tbRCTL4 = new System.Windows.Forms.TextBox();
@@ -73,14 +80,7 @@
             this.cbZeroCheck4 = new System.Windows.Forms.CheckBox();
             this.cbStatusCheck4 = new System.Windows.Forms.CheckBox();
             this.tbProgramID4 = new System.Windows.Forms.TextBox();
-            this.btnDeleteAll = new System.Windows.Forms.Button();
-            this.btnLoad = new System.Windows.Forms.Button();
-            this.btnSet = new System.Windows.Forms.Button();
             this.cbDRL3 = new System.Windows.Forms.CheckBox();
-            this.lbProgramID3 = new System.Windows.Forms.Label();
-            this.lbProgramID4 = new System.Windows.Forms.Label();
-            this.lbProgramID1 = new System.Windows.Forms.Label();
-            this.lbProgramID2 = new System.Windows.Forms.Label();
             this.cbDRL1 = new System.Windows.Forms.CheckBox();
             this.cbDRL2 = new System.Windows.Forms.CheckBox();
             this.cbDRL4 = new System.Windows.Forms.CheckBox();
@@ -102,6 +102,35 @@
             this.gbGeneral.TabIndex = 0;
             this.gbGeneral.TabStop = false;
             // 
+            // btnSet
+            // 
+            this.btnSet.Location = new System.Drawing.Point(563, 66);
+            this.btnSet.Name = "btnSet";
+            this.btnSet.Size = new System.Drawing.Size(79, 41);
+            this.btnSet.TabIndex = 2;
+            this.btnSet.Text = "Set";
+            this.btnSet.UseVisualStyleBackColor = true;
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.Location = new System.Drawing.Point(482, 66);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(79, 41);
+            this.btnLoad.TabIndex = 1;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
+            // btnDeleteAll
+            // 
+            this.btnDeleteAll.BackColor = System.Drawing.Color.IndianRed;
+            this.btnDeleteAll.Location = new System.Drawing.Point(482, 11);
+            this.btnDeleteAll.Name = "btnDeleteAll";
+            this.btnDeleteAll.Size = new System.Drawing.Size(160, 49);
+            this.btnDeleteAll.TabIndex = 0;
+            this.btnDeleteAll.Text = "Delete All";
+            this.btnDeleteAll.UseVisualStyleBackColor = false;
+            // 
             // gbDRL1
             // 
             this.gbDRL1.Controls.Add(this.lbProgramID1);
@@ -122,33 +151,71 @@
             this.gbDRL1.TabIndex = 1;
             this.gbDRL1.TabStop = false;
             // 
-            // tbProgramID1
+            // lbProgramID1
             // 
-            this.tbProgramID1.Location = new System.Drawing.Point(83, 28);
-            this.tbProgramID1.Name = "tbProgramID1";
-            this.tbProgramID1.Size = new System.Drawing.Size(230, 22);
-            this.tbProgramID1.TabIndex = 0;
+            this.lbProgramID1.AutoSize = true;
+            this.lbProgramID1.Location = new System.Drawing.Point(17, 31);
+            this.lbProgramID1.Name = "lbProgramID1";
+            this.lbProgramID1.Size = new System.Drawing.Size(60, 12);
+            this.lbProgramID1.TabIndex = 13;
+            this.lbProgramID1.Text = "Program ID";
             // 
-            // cbStatusCheck1
+            // tbRCFL1
             // 
-            this.cbStatusCheck1.AutoSize = true;
-            this.cbStatusCheck1.Location = new System.Drawing.Point(19, 65);
-            this.cbStatusCheck1.Name = "cbStatusCheck1";
-            this.cbStatusCheck1.Size = new System.Drawing.Size(84, 16);
-            this.cbStatusCheck1.TabIndex = 2;
-            this.cbStatusCheck1.Text = "Status Check";
-            this.cbStatusCheck1.UseVisualStyleBackColor = true;
+            this.tbRCFL1.Enabled = false;
+            this.tbRCFL1.Location = new System.Drawing.Point(38, 281);
+            this.tbRCFL1.Name = "tbRCFL1";
+            this.tbRCFL1.Size = new System.Drawing.Size(192, 22);
+            this.tbRCFL1.TabIndex = 10;
             // 
-            // cbZeroCheck1
+            // tbCVML1
             // 
-            this.cbZeroCheck1.AutoSize = true;
-            this.cbZeroCheck1.Location = new System.Drawing.Point(19, 100);
-            this.cbZeroCheck1.Name = "cbZeroCheck1";
-            this.cbZeroCheck1.Size = new System.Drawing.Size(191, 16);
-            this.cbZeroCheck1.TabIndex = 3;
-            this.cbZeroCheck1.Text = "Amount, Authorized of Zero Check";
-            this.cbZeroCheck1.UseVisualStyleBackColor = true;
-            this.cbZeroCheck1.CheckedChanged += new System.EventHandler(this.cbZeroCheck1_CheckedChanged);
+            this.tbCVML1.Enabled = false;
+            this.tbCVML1.Location = new System.Drawing.Point(38, 221);
+            this.tbCVML1.Name = "tbCVML1";
+            this.tbCVML1.Size = new System.Drawing.Size(192, 22);
+            this.tbCVML1.TabIndex = 9;
+            // 
+            // tbRCTL1
+            // 
+            this.tbRCTL1.Enabled = false;
+            this.tbRCTL1.Location = new System.Drawing.Point(38, 165);
+            this.tbRCTL1.Name = "tbRCTL1";
+            this.tbRCTL1.Size = new System.Drawing.Size(192, 22);
+            this.tbRCTL1.TabIndex = 8;
+            // 
+            // cbRCFLCheck1
+            // 
+            this.cbRCFLCheck1.AutoSize = true;
+            this.cbRCFLCheck1.Location = new System.Drawing.Point(19, 259);
+            this.cbRCFLCheck1.Name = "cbRCFLCheck1";
+            this.cbRCFLCheck1.Size = new System.Drawing.Size(201, 16);
+            this.cbRCFLCheck1.TabIndex = 7;
+            this.cbRCFLCheck1.Text = "Reader Contactless Floor Limit Check";
+            this.cbRCFLCheck1.UseVisualStyleBackColor = true;
+            this.cbRCFLCheck1.CheckedChanged += new System.EventHandler(this.cbRCFLCheck1_CheckedChanged);
+            // 
+            // cbCVMCheck1
+            // 
+            this.cbCVMCheck1.AutoSize = true;
+            this.cbCVMCheck1.Location = new System.Drawing.Point(19, 199);
+            this.cbCVMCheck1.Name = "cbCVMCheck1";
+            this.cbCVMCheck1.Size = new System.Drawing.Size(193, 16);
+            this.cbCVMCheck1.TabIndex = 6;
+            this.cbCVMCheck1.Text = "Reader CVM Required Limit Check";
+            this.cbCVMCheck1.UseVisualStyleBackColor = true;
+            this.cbCVMCheck1.CheckedChanged += new System.EventHandler(this.cbCVMCheck1_CheckedChanged);
+            // 
+            // cbRCTL1
+            // 
+            this.cbRCTL1.AutoSize = true;
+            this.cbRCTL1.Location = new System.Drawing.Point(19, 143);
+            this.cbRCTL1.Name = "cbRCTL1";
+            this.cbRCTL1.Size = new System.Drawing.Size(230, 16);
+            this.cbRCTL1.TabIndex = 5;
+            this.cbRCTL1.Text = "Reader Contactless Transaction Limit Check";
+            this.cbRCTL1.UseVisualStyleBackColor = true;
+            this.cbRCTL1.CheckedChanged += new System.EventHandler(this.cbRCTL1_CheckedChanged);
             // 
             // cbbOption1
             // 
@@ -162,62 +229,33 @@
             this.cbbOption1.Size = new System.Drawing.Size(98, 20);
             this.cbbOption1.TabIndex = 4;
             // 
-            // cbRCTL1
+            // cbZeroCheck1
             // 
-            this.cbRCTL1.AutoSize = true;
-            this.cbRCTL1.Location = new System.Drawing.Point(19, 143);
-            this.cbRCTL1.Name = "cbRCTL1";
-            this.cbRCTL1.Size = new System.Drawing.Size(230, 16);
-            this.cbRCTL1.TabIndex = 5;
-            this.cbRCTL1.Text = "Reader Contactless Transaction Limit Check";
-            this.cbRCTL1.UseVisualStyleBackColor = true;
-            this.cbRCTL1.CheckedChanged += new System.EventHandler(this.cbRCTL1_CheckedChanged);
+            this.cbZeroCheck1.AutoSize = true;
+            this.cbZeroCheck1.Location = new System.Drawing.Point(19, 100);
+            this.cbZeroCheck1.Name = "cbZeroCheck1";
+            this.cbZeroCheck1.Size = new System.Drawing.Size(191, 16);
+            this.cbZeroCheck1.TabIndex = 3;
+            this.cbZeroCheck1.Text = "Amount, Authorized of Zero Check";
+            this.cbZeroCheck1.UseVisualStyleBackColor = true;
+            this.cbZeroCheck1.CheckedChanged += new System.EventHandler(this.cbZeroCheck1_CheckedChanged);
             // 
-            // cbCVMCheck1
+            // cbStatusCheck1
             // 
-            this.cbCVMCheck1.AutoSize = true;
-            this.cbCVMCheck1.Location = new System.Drawing.Point(19, 199);
-            this.cbCVMCheck1.Name = "cbCVMCheck1";
-            this.cbCVMCheck1.Size = new System.Drawing.Size(193, 16);
-            this.cbCVMCheck1.TabIndex = 6;
-            this.cbCVMCheck1.Text = "Reader CVM Required Limit Check";
-            this.cbCVMCheck1.UseVisualStyleBackColor = true;
-            this.cbCVMCheck1.CheckedChanged += new System.EventHandler(this.cbCVMCheck1_CheckedChanged);
+            this.cbStatusCheck1.AutoSize = true;
+            this.cbStatusCheck1.Location = new System.Drawing.Point(19, 65);
+            this.cbStatusCheck1.Name = "cbStatusCheck1";
+            this.cbStatusCheck1.Size = new System.Drawing.Size(84, 16);
+            this.cbStatusCheck1.TabIndex = 2;
+            this.cbStatusCheck1.Text = "Status Check";
+            this.cbStatusCheck1.UseVisualStyleBackColor = true;
             // 
-            // cbRCFLCheck1
+            // tbProgramID1
             // 
-            this.cbRCFLCheck1.AutoSize = true;
-            this.cbRCFLCheck1.Location = new System.Drawing.Point(19, 259);
-            this.cbRCFLCheck1.Name = "cbRCFLCheck1";
-            this.cbRCFLCheck1.Size = new System.Drawing.Size(201, 16);
-            this.cbRCFLCheck1.TabIndex = 7;
-            this.cbRCFLCheck1.Text = "Reader Contactless Floor Limit Check";
-            this.cbRCFLCheck1.UseVisualStyleBackColor = true;
-            this.cbRCFLCheck1.CheckedChanged += new System.EventHandler(this.cbRCFLCheck1_CheckedChanged);
-            // 
-            // tbRCTL1
-            // 
-            this.tbRCTL1.Enabled = false;
-            this.tbRCTL1.Location = new System.Drawing.Point(38, 165);
-            this.tbRCTL1.Name = "tbRCTL1";
-            this.tbRCTL1.Size = new System.Drawing.Size(192, 22);
-            this.tbRCTL1.TabIndex = 8;
-            // 
-            // tbCVML1
-            // 
-            this.tbCVML1.Enabled = false;
-            this.tbCVML1.Location = new System.Drawing.Point(38, 221);
-            this.tbCVML1.Name = "tbCVML1";
-            this.tbCVML1.Size = new System.Drawing.Size(192, 22);
-            this.tbCVML1.TabIndex = 9;
-            // 
-            // tbRCFL1
-            // 
-            this.tbRCFL1.Enabled = false;
-            this.tbRCFL1.Location = new System.Drawing.Point(38, 281);
-            this.tbRCFL1.Name = "tbRCFL1";
-            this.tbRCFL1.Size = new System.Drawing.Size(192, 22);
-            this.tbRCFL1.TabIndex = 10;
+            this.tbProgramID1.Location = new System.Drawing.Point(83, 28);
+            this.tbProgramID1.Name = "tbProgramID1";
+            this.tbProgramID1.Size = new System.Drawing.Size(230, 22);
+            this.tbProgramID1.TabIndex = 0;
             // 
             // gbDRL2
             // 
@@ -238,6 +276,15 @@
             this.gbDRL2.Size = new System.Drawing.Size(323, 332);
             this.gbDRL2.TabIndex = 11;
             this.gbDRL2.TabStop = false;
+            // 
+            // lbProgramID2
+            // 
+            this.lbProgramID2.AutoSize = true;
+            this.lbProgramID2.Location = new System.Drawing.Point(17, 31);
+            this.lbProgramID2.Name = "lbProgramID2";
+            this.lbProgramID2.Size = new System.Drawing.Size(60, 12);
+            this.lbProgramID2.TabIndex = 14;
+            this.lbProgramID2.Text = "Program ID";
             // 
             // tbRCFL2
             // 
@@ -356,6 +403,15 @@
             this.gbDRL3.TabIndex = 11;
             this.gbDRL3.TabStop = false;
             // 
+            // lbProgramID3
+            // 
+            this.lbProgramID3.AutoSize = true;
+            this.lbProgramID3.Location = new System.Drawing.Point(17, 34);
+            this.lbProgramID3.Name = "lbProgramID3";
+            this.lbProgramID3.Size = new System.Drawing.Size(60, 12);
+            this.lbProgramID3.TabIndex = 11;
+            this.lbProgramID3.Text = "Program ID";
+            // 
             // tbRCFL3
             // 
             this.tbRCFL3.Enabled = false;
@@ -473,6 +529,15 @@
             this.gbDRL4.TabIndex = 11;
             this.gbDRL4.TabStop = false;
             // 
+            // lbProgramID4
+            // 
+            this.lbProgramID4.AutoSize = true;
+            this.lbProgramID4.Location = new System.Drawing.Point(17, 34);
+            this.lbProgramID4.Name = "lbProgramID4";
+            this.lbProgramID4.Size = new System.Drawing.Size(60, 12);
+            this.lbProgramID4.TabIndex = 12;
+            this.lbProgramID4.Text = "Program ID";
+            // 
             // tbRCFL4
             // 
             this.tbRCFL4.Enabled = false;
@@ -570,34 +635,6 @@
             this.tbProgramID4.Size = new System.Drawing.Size(230, 22);
             this.tbProgramID4.TabIndex = 0;
             // 
-            // btnDeleteAll
-            // 
-            this.btnDeleteAll.BackColor = System.Drawing.Color.IndianRed;
-            this.btnDeleteAll.Location = new System.Drawing.Point(482, 11);
-            this.btnDeleteAll.Name = "btnDeleteAll";
-            this.btnDeleteAll.Size = new System.Drawing.Size(160, 49);
-            this.btnDeleteAll.TabIndex = 0;
-            this.btnDeleteAll.Text = "Delete All";
-            this.btnDeleteAll.UseVisualStyleBackColor = false;
-            // 
-            // btnLoad
-            // 
-            this.btnLoad.Location = new System.Drawing.Point(482, 66);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(79, 41);
-            this.btnLoad.TabIndex = 1;
-            this.btnLoad.Text = "Load";
-            this.btnLoad.UseVisualStyleBackColor = true;
-            // 
-            // btnSet
-            // 
-            this.btnSet.Location = new System.Drawing.Point(563, 66);
-            this.btnSet.Name = "btnSet";
-            this.btnSet.Size = new System.Drawing.Size(79, 41);
-            this.btnSet.TabIndex = 2;
-            this.btnSet.Text = "Set";
-            this.btnSet.UseVisualStyleBackColor = true;
-            // 
             // cbDRL3
             // 
             this.cbDRL3.AutoSize = true;
@@ -608,42 +645,6 @@
             this.cbDRL3.Text = "DRL #3";
             this.cbDRL3.UseVisualStyleBackColor = true;
             this.cbDRL3.CheckedChanged += new System.EventHandler(this.cbDRL3_CheckedChanged);
-            // 
-            // lbProgramID3
-            // 
-            this.lbProgramID3.AutoSize = true;
-            this.lbProgramID3.Location = new System.Drawing.Point(17, 34);
-            this.lbProgramID3.Name = "lbProgramID3";
-            this.lbProgramID3.Size = new System.Drawing.Size(60, 12);
-            this.lbProgramID3.TabIndex = 11;
-            this.lbProgramID3.Text = "Program ID";
-            // 
-            // lbProgramID4
-            // 
-            this.lbProgramID4.AutoSize = true;
-            this.lbProgramID4.Location = new System.Drawing.Point(17, 34);
-            this.lbProgramID4.Name = "lbProgramID4";
-            this.lbProgramID4.Size = new System.Drawing.Size(60, 12);
-            this.lbProgramID4.TabIndex = 12;
-            this.lbProgramID4.Text = "Program ID";
-            // 
-            // lbProgramID1
-            // 
-            this.lbProgramID1.AutoSize = true;
-            this.lbProgramID1.Location = new System.Drawing.Point(17, 31);
-            this.lbProgramID1.Name = "lbProgramID1";
-            this.lbProgramID1.Size = new System.Drawing.Size(60, 12);
-            this.lbProgramID1.TabIndex = 13;
-            this.lbProgramID1.Text = "Program ID";
-            // 
-            // lbProgramID2
-            // 
-            this.lbProgramID2.AutoSize = true;
-            this.lbProgramID2.Location = new System.Drawing.Point(17, 31);
-            this.lbProgramID2.Name = "lbProgramID2";
-            this.lbProgramID2.Size = new System.Drawing.Size(60, 12);
-            this.lbProgramID2.TabIndex = 14;
-            this.lbProgramID2.Text = "Program ID";
             // 
             // cbDRL1
             // 

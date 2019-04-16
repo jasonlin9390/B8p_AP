@@ -1,0 +1,11 @@
+#1
+ProgramID=01
+StatusCheck=0
+AmountZeroCheck=0
+AmountOption=0
+RCTLChcek=1
+RCTL=000000002000
+CVMLCheck=1
+CVML=000000000500
+RCFLCheck=1
+RCFL=000000001000
