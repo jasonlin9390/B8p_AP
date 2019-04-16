@@ -1,0 +1,90 @@
+9C n 20
+40000040 b 080000
+40000041 b 01
+40000042 b 01
+40000043 n 000000010000
+40000044 n 000000018000
+40000045 n 000000005000
+40000046 b 00
+40000048 b 00
+40000403 b 0000000000
+40000404 b 0000000000
+40000405 b 0000000000
+40000401 n 0060
+9F33 b E06088
+9F34 b 3F0000
+9F35 n 25
+9F6D n C0
+40000440 b DF8170
+40000441 b 56
+40000442 b 57
+DF8170 b 07
+40000402 b 07
+95 b 0000000000
+9F6E b D8E00000
+9F06 b A000000277
+9F09 b 0002
+9F1B b 00002710
+9F58 n 03
+9F59 b DC8700
+9F5A b 00
+9F5D n 000000005000
+9F5E b E000
+9F5F n 000000008000
+5F2A n 0124
+NOTE:
+40000049			//Application Selection Identifier
+40000040			//Requested Kernel ID
+40000021			//MagStripe Indicator
+40000041			//Status Check Support
+40000042			//Zero Amount Allowed: 0: not allowed(option 2); 1: allowed(option 1); 2: disable
+40000043			//Contactless Floor Limit(40000024_n_ means Reader Contactless Floor Limit Check disabled)
+40000044			//Contactless Transaction Limit(40000025_n_ means Reader Contactless Transaction Limit Check disabled)
+40000045			//CVM Required Limit(40000026_n_ means Reader CVM Required Limit Check disabled)
+40000046			//Extended Selection Support
+40000047			//Display Message Hold Time
+40000048			//List of AID Support : 0: not supported; >0: Supported with selection priority (1:first priority)
+9F06					//AID
+9C						//Transaction Type
+9F35					//Terminal Type
+40000403			//TAC - Default
+40000404			//TAC - Denial
+40000405			//TAC - Online
+40000401			//Unpredictable Number Range
+40000402			//Track 1 & 2 Configuration
+							//Bit 3: 0: Disable Track 2, 1: Enable Track 2
+							//Bit 2: 0: Disable Track 1, 1: Enable Track 1
+							//Bit 1: 0: Output Tag 57, 1: format track 2.
+40000440			//Issuer/Acquirer tag define for Point of Service Data Code
+40000441			//Issuer/Acquirer tag define for Track 1 Data
+40000442			//Issuer/Acquirer tag define for Track 2 Data
+9F09				//Application Version Number
+9F39		// POS Entry Mode, 7: EMV mode transaction, 91: mag-stripe mode transaction
+9F1B		// Terminal Floor Limit
+9F34		// Cardholder Verification Method (CVM) Results
+9F6D		// Expresspay Terminal Capabilities
+9F6E		// Terminal Transaction Capabilities
+9F5A 		// Terminal transaction Type
+9F5D 		// Terminal Contactless Receipt Required Limit
+9F5E		// Terminal Option Status (TOS)
+9F5F		// Terminal (Reader) Contactless Floor Limit
+9F58 		// Merchant Type Indicator (01 ~ 05)
+5F2A 		// Transaction Currency Code
+
+// CONF_5 = CONF_1 + change TAC Default
+40000403 b 8000000000
+
+// CONF_6 = CONF_1 + change TAC Default
+40000403 b 74F0848070
+
+// CONF_10 = CONF_1 + change TAC Denial
+40000404 b 8000000000
+
+// CONF_11 = CONF_1 + change TAC Denial
+40000404 b 74F0848070
+
+// CONF_12 = CONF_1 + change TAC Online
+40000405 b 74F0848070
+
+// CONF_15 = CONF_1 + change TAC Online
+40000405 b 8000000000

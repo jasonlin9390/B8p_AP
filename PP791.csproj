@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7C8979B9-5CE9-4F8C-9089-E5DD269836FE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PP791</RootNamespace>
+    <AssemblyName>PP791</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>發行\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>PP791.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PP791_DLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\PP791_DLL.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BankSideForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BankSideForm.Designer.cs">
+      <DependentUpon>BankSideForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BatchShowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BatchShowForm.Designer.cs">
+      <DependentUpon>BatchShowForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="com_port.cs" />
+    <Compile Include="com_setting.cs" />
+    <Compile Include="DllClass.cs" />
+    <Compile Include="DRL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DRL.Designer.cs">
+      <DependentUpon>DRL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="E3_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="E3_Form.Designer.cs">
+      <DependentUpon>E3_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EMVTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EMVTestForm.Designer.cs">
+      <DependentUpon>EMVTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EMV_Data_LoadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EMV_Data_LoadForm.Designer.cs">
+      <DependentUpon>EMV_Data_LoadForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extension.cs" />
+    <Compile Include="PCD_TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PCD_TestForm.Designer.cs">
+      <DependentUpon>PCD_TestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PPDMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PPDMain.Designer.cs">
+      <DependentUpon>PPDMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="message.cs" />
+    <Compile Include="messages.cs" />
+    <Compile Include="Moduel2.cs" />
+    <Compile Include="Module1.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TLV.cs" />
+    <Compile Include="_Status.cs" />
+    <EmbeddedResource Include="BankSideForm.resx">
+      <DependentUpon>BankSideForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BatchShowForm.resx">
+      <DependentUpon>BatchShowForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DRL.resx">
+      <DependentUpon>DRL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="E3_Form.resx">
+      <DependentUpon>E3_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EMVTestForm.resx">
+      <DependentUpon>EMVTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EMV_Data_LoadForm.resx">
+      <DependentUpon>EMV_Data_LoadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PCD_TestForm.resx">
+      <DependentUpon>PCD_TestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PPDMain.resx">
+      <DependentUpon>PPDMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="vip_api.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Config\default_inter.cer" />
+    <None Include="Config\default_vendor.cer" />
+    <None Include="Config\exclude_hgm.txt.sign" />
+    <None Include="Config\hpsnewtestbbparms.dat" />
+    <None Include="Config\hpsnewtestparms.dat.sign" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="bank_api.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Content Include="Config\AccountType.txt" />
+    <Content Include="Config\CAPK\AmericanExpress\A00000002501.txt" />
+    <Content Include="Config\CAPK\AmericanExpress\A00000002502.txt" />
+    <Content Include="Config\CAPK\AmericanExpress\A00000002503.txt" />
+    <Content Include="Config\CAPK\AmericanExpress\A00000002504.txt" />
+    <Content Include="Config\CAPK\AmericanExpress\A00000002505.txt" />
+    <Content Include="Config\CAPK\AmericanExpress\A00000002506.txt" />
+    <Content Include="Config\CAPK\AmericanExpress\A00000002509.txt" />
+    <Content Include="Config\CAPK\Discover D-PAS\A00000015201.txt" />
+    <Content Include="Config\CAPK\Discover D-PAS\A00000015202.txt" />
+    <Content Include="Config\CAPK\Discover D-PAS\A00000015203.txt" />
+    <Content Include="Config\CAPK\MasterCard\A00000000400.txt" />
+    <Content Include="Config\CAPK\MasterCard\A00000000402.txt" />
+    <Content Include="Config\CAPK\MasterCard\A00000000405.txt" />
+    <Content Include="Config\CAPK\MasterCard\A000000004EF.txt" />
+    <Content Include="Config\CAPK\MasterCard\A000000004F1.txt" />
+    <Content Include="Config\CAPK\MasterCard\A000000004F3.txt" />
+    <Content Include="Config\CAPK\MasterCard\A000000004F5.txt" />
+    <Content Include="Config\CAPK\MasterCard\A000000004F6.txt" />
+    <Content Include="Config\CAPK\MasterCard\A000000004F7.txt" />
+    <Content Include="Config\CAPK\MasterCard\A000000004F8.txt" />
+    <Content Include="Config\CAPK\MasterCard\A000000004F9.txt" />
+    <Content Include="Config\CAPK\MasterCard\A000000004FA.txt" />
+    <Content Include="Config\CAPK\Visa\A00000000301.txt" />
+    <Content Include="Config\CAPK\Visa\A00000000307.txt" />
+    <Content Include="Config\CAPK\Visa\A00000000308.txt" />
+    <Content Include="Config\CAPK\Visa\A00000000309.txt" />
+    <Content Include="Config\CAPK\Visa\A00000000392.txt" />
+    <Content Include="Config\CAPK\Visa\A00000000394.txt" />
+    <Content Include="Config\CAPK\Visa\A00000000395.txt" />
+    <Content Include="Config\CAPK\Visa\A00000000396.txt" />
+    <Content Include="Config\CAPK\Visa\A00000000399.txt" />
+    <Content Include="Config\Currency Code.txt" />
+    <Content Include="Config\exclude_hgm.txt" />
+    <Content Include="Config\ICC\ICC_A0000000031010.txt" />
+    <Content Include="Config\ICC\ICC_DataFormats.txt" />
+    <Content Include="Config\ICC\ICC_Terminal.txt" />
+    <Content Include="Config\TransactionInfo.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

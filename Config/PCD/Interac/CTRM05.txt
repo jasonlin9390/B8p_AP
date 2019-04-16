@@ -1,0 +1,63 @@
+9C n 00
+40000004 n 000000000600
+40000005 n 00
+40000006 n 63
+40000040 b 080000
+40000041 b 01
+40000042 b 01
+40000043 n 000000010000
+40000044 n 000000018000
+40000045 n 000000005000
+40000046 b 00
+40000048 b 00
+40000403 b 0000000000
+40000404 b 0000000000
+40000405 b 0000000000
+40000056 n 02
+9F33 b E06088
+9F34 b 3F0000
+9F35 n 25
+95 b 0000000000
+9F06 b A0000002771010
+9F09 b 0002
+9F1B b 00002710
+9F58 n 03
+9F59 b 9C4700
+9F5A b 00
+9F5D n 000000005000
+9F5E b 4000
+9F5F n 000000008000
+5F2A n 0124
+9F39 n 07
+NOTE:
+40000004			// Threshold Value for Biased Random Selection
+40000005			// Target Percentage to be used for Random Selection	
+40000006			// Maximum Target Percentage to be used for Biased Random Selection
+40000040			// Requested Kernel ID
+40000041			// Status Check Support
+40000042			// Zero Amount Allowed: 0: not allowed(option 2); 1: allowed(option 1); 2: disable
+40000043			// Contactless Floor Limit(40000024_n_ means Reader Contactless Floor Limit Check disabled)
+40000044			// Contactless Transaction Limit(40000025_n_ means Reader Contactless Transaction Limit Check disabled)
+40000045			// CVM Required Limit(40000026_n_ means Reader CVM Required Limit Check disabled)
+40000046			// Extended Selection Support
+40000047			// Display Message Hold Time
+40000048			// List of AID Support : 0: not supported; >0: Supported with selection priority (1:first priority)
+40000403			// TAC - Default
+40000404			// TAC - Denial
+40000405			// TAC - Online
+9F06				// AID
+9C				// Transaction Type
+9F35				// Terminal Type
+9F09				// Application Version Number
+9F39				// POS Entry Mode, 7: EMV mode transaction, 91: mag-stripe mode transaction
+9F1B				// Terminal Floor Limit
+9F34				// Cardholder Verification Method (CVM) Results
+9F6D				// Expresspay Terminal Capabilities
+9F6E				// Terminal Transaction Capabilities
+9F5A 				// Terminal transaction Type
+9F5D 				// Terminal Contactless Receipt Required Limit
+9F5E				// Terminal Option Status (TOS)
+9F5F				// Terminal (Reader) Contactless Floor Limit
+9F58 				// Merchant Type Indicator (01 ~ 05)
+5F2A 				// Transaction Currency Code
+9F39 				// POS Entry Mode: 05 - ICC, 07 - contactless, 91 - Magnetic stripe

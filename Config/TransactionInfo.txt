@@ -1,0 +1,8 @@
+00  Goods  40
+00  Service  20
+20  CashBack  10
+01  Cash  80
+04  Inquiry  08
+09  Transfer  04
+08  Payment  02
+07  Administrative  01

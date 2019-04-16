@@ -1,0 +1,35 @@
+50000002 b 00
+50000004 b DF71
+50000007 n 80
+50000022 b DF72
+50000027 b DF75
+50000028 b DF76
+50000029 b DF77
+5000002A b DF78
+9F15 n 0100
+9F16 ans 123456789012345
+9F1A n 0056
+9F1C an SmartPOS
+9F1E an SmartPOS
+9F33 b E028C8
+9F35 n 22
+9F39 n 05
+9F40 b FF80008001
+NOTE:
+50000002            	//Application select method
+50000004		//Encrypted Online PIN Block
+50000007		//The code of POS Entry Mode for Exception Handling
+50000022		//DUKPT KSN
+50000027		//VDSP PAN (Encrypted)
+50000028		//VDSP Cardholder Name (Encrypted)
+50000029		//VDSP TK1 Discretionary Data (Encrypted)
+5000002A		//VDSP TK2 Discretionary Data (Encrypted)
+9F15			//Merchant Category Code
+9F16                	//Merchant Identifier
+9F1A                    //Terminal Country Code
+9F1C                    //Terminal Identifier
+9F1E                    //IFD Serial Number
+9F33                    //Terminal Capabilities
+9F35                    //Terminal Type
+9F39                    //Point-of-Service Entry Mode
+9F40                    //Additional Terminal Capabilites

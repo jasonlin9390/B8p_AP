@@ -1,0 +1,4 @@
+Default 00
+Savings 10
+Cheque/Debit 20
+Credit 30
