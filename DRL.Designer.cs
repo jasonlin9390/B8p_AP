@@ -110,6 +110,7 @@
             this.btnSet.TabIndex = 2;
             this.btnSet.Text = "Set";
             this.btnSet.UseVisualStyleBackColor = true;
+            this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
             // 
             // btnLoad
             // 
@@ -130,6 +131,7 @@
             this.btnDeleteAll.TabIndex = 0;
             this.btnDeleteAll.Text = "Delete All";
             this.btnDeleteAll.UseVisualStyleBackColor = false;
+            this.btnDeleteAll.Click += new System.EventHandler(this.btnDeleteAll_Click);
             // 
             // gbDRL1
             // 

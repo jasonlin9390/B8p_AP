@@ -257,6 +257,25 @@ namespace PP791
                 }
             }
         }
+
+        public static string ByteArrayToString(byte[] InputBuff)
+        {
+            int i;
+            string rtnString = null;
+
+            for (i=0; i < InputBuff.Length; i++)
+            {
+                if (InputBuff[i] < 0x20)
+                    if (InputBuff[i] < 0x10)
+                        rtnString = rtnString + "<0" + InputBuff[i].ToString("X") + ">";
+                    else
+                        rtnString = rtnString + "<" + InputBuff[i].ToString("X") + ">";
+                else
+                    rtnString = rtnString + Convert.ToChar(InputBuff[i]).ToString();
+            }
+            return rtnString;
+
+        }
         /*****************************************************************/
         public static string charStr(byte input)
         {

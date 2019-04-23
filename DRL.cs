@@ -19,6 +19,7 @@ namespace PP791
 
         private OpenFileDialog openFileDialog1;
 
+        private CheckBox[] cbDRLs;
         private TextBox[] tbProgramIDs;
         private CheckBox[] cbStatusChecks;
         private CheckBox[] cbZeroChecks;
@@ -39,6 +40,7 @@ namespace PP791
 
         private void SetComponentArray()
         {
+            cbDRLs = new CheckBox[] { cbDRL1, cbDRL2, cbDRL3, cbDRL4 };
             tbProgramIDs = new TextBox[] { tbProgramID1, tbProgramID2, tbProgramID3, tbProgramID4 };
             cbStatusChecks = new CheckBox[] { cbStatusCheck1 , cbStatusCheck2 , cbStatusCheck3 , cbStatusCheck4 };
             cbZeroChecks = new CheckBox[] { cbZeroCheck1 , cbZeroCheck2 , cbZeroCheck3 , cbZeroCheck4 };
@@ -65,11 +67,214 @@ namespace PP791
                 tbCVMs[i].Text = "";
                 cbRCFLs[i].Checked = false;
                 tbRCFLs[i].Text = "";
+                cbDRLs[i].Checked = false;
             }
-            cbDRL1.Checked = false;
-            cbDRL2.Checked = false;
-            cbDRL3.Checked = false;
-            cbDRL4.Checked = false;
+        }
+
+        private void btnSet_Click(object sender, EventArgs e)
+        {
+            int rtn = -1;
+            byte[] receive_buf;
+            string sending_msg = "";
+            List<string> strlist = new List<string>();
+
+            btnDeleteAll_Click(sender, e);
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (cbDRLs[i].Checked)
+                {
+                    if (tbProgramIDs[i].Text == "")
+                    {
+                        MessageBox.Show("Program ID can not be empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+
+                    // Reset string fro each DRL
+                    strlist.Clear();
+                    sending_msg = "";
+
+                    // Program ID
+                    sending_msg += Module1.charStr(0x1a) + tbProgramIDs[i].Text;
+
+
+                    // Status Check: FFFF8007<1C>2<1C>XX
+                    strlist.Add("FFFF8007");
+                    strlist.Add("2");
+                    if (cbStatusChecks[i].Checked)
+                    {
+                        strlist.Add("01");
+                    }
+                    else
+                    {
+                        strlist.Add("00");
+                    }
+                    sending_msg += Module1.charStr(0x1a) + string.Join(Module1.charStr(0x1c), strlist);
+                    strlist.Clear();
+
+                    // Zero Amount Check: FFFF8005<1C>2<1C>XX
+                    // Zero Amount Option: FFFF8008<1C>2<1C>XX
+                    strlist.Add("FFFF8005");
+                    strlist.Add("2");
+                    if (cbZeroChecks[i].Checked)
+                    {
+                        strlist.Add("01");
+                        sending_msg += Module1.charStr(0x1a) + string.Join(Module1.charStr(0x1c), strlist);
+                        strlist.Clear();
+
+                        // Zero Amount Option
+                        strlist.Add("FFFF8008");
+                        strlist.Add("2");
+                        if (cbbZeroChecks[i].SelectedIndex == 0)
+                        {
+                            // Option 1
+                            strlist.Add("01");
+
+                        }
+                        else
+                        {
+                            strlist.Add("02");
+                        }
+                        
+                    }
+                    else
+                    {
+                        strlist.Add("00");
+                        sending_msg += Module1.charStr(0x1a) + string.Join(Module1.charStr(0x1c), strlist);
+                        strlist.Clear();
+
+                        strlist.Add("FFFF8008");
+                        strlist.Add("2");
+                        strlist.Add("00");
+
+                    }
+                    sending_msg += Module1.charStr(0x1a) + string.Join(Module1.charStr(0x1c), strlist);
+                    strlist.Clear();
+
+                    // Reader CL Transaction Limit Check: FFFF8004<1C>2<1C>XX                    
+                    strlist.Add("FFFF8004");
+                    strlist.Add("2");
+                    if (cbRCTLs[i].Checked)
+                    {
+                        strlist.Add("01");
+                    }
+                    else
+                    {
+                        strlist.Add("00");
+                    }
+                    sending_msg += Module1.charStr(0x1a) + string.Join(Module1.charStr(0x1c), strlist);
+                    strlist.Clear();
+
+                    // Reader CL Transaction Limit: DF8124<1C>2<1C>XXXXXXXXXXXX
+                    if (cbRCTLs[i].Checked)
+                    {
+                        strlist.Add("DF8124");
+                        strlist.Add("2");
+                        if (tbRCTLs[i].Text.Length != 12)
+                        {
+                            MessageBox.Show("Error in " + cbDRLs[i].Text + ":" +
+                                "\n\nThe length of Reader CL Transaction Limit must be 12",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
+                        strlist.Add(tbRCTLs[i].Text);
+                        sending_msg += Module1.charStr(0x1a) + string.Join(Module1.charStr(0x1c), strlist);
+                        strlist.Clear();
+                    }
+                        
+                    // CVM Limit Check: FFFF8009<1C>2<1C>XX
+                    strlist.Add("FFFF8009");
+                    strlist.Add("2");
+                    if (cbCVMs[i].Checked)
+                    {
+                        strlist.Add("01");
+                    }
+                    else
+                    {
+                        strlist.Add("00");
+                    }
+                    sending_msg += Module1.charStr(0x1a) + string.Join(Module1.charStr(0x1c), strlist);
+                    strlist.Clear();
+
+                    // CVM Limit: DF8126<1C>2<1C>XXXXXXXXXXXX
+                    if (cbCVMs[i].Checked)
+                    {
+                        strlist.Add("DF8126");
+                        strlist.Add("2");
+                        if (tbCVMs[i].Text.Length != 12)
+                        {
+                            MessageBox.Show("Error in " + cbDRLs[i].Text + ":" +
+                                "\n\nThe length of CVM Limit must be 12",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
+                        strlist.Add(tbCVMs[i].Text);
+                        sending_msg += Module1.charStr(0x1a) + string.Join(Module1.charStr(0x1c), strlist);
+                        strlist.Clear();
+                    }                   
+
+                    // Reader CL Floor Limit Check: FFFF800A<1C>2<1C>XX
+                    strlist.Add("FFFF800A");
+                    strlist.Add("2");
+                    if (cbRCFLs[i].Checked)
+                    {
+                        if (tbRCFLs[i].Text == "")
+                        {
+                            // Reader CL Floor Limit not present
+                            strlist.Add("10");
+
+                        }
+                        else
+                        {
+                            strlist.Add("01");
+                        }
+                        
+                    }
+                    else
+                    {
+                        strlist.Add("00");
+                    }
+                    sending_msg += Module1.charStr(0x1a) + string.Join(Module1.charStr(0x1c), strlist);
+                    strlist.Clear();
+
+                    // Reader CL Floor Limit: DF8123<1C>2<1C>XXXXXXXXXXXX
+                    if (cbRCFLs[i].Checked && tbRCFLs[i].Text != "")
+                    {
+                        strlist.Add("DF8123");
+                        strlist.Add("2");
+                        if (tbRCFLs[i].Text!= "" && tbRCFLs[i].Text.Length != 12)
+                        {
+                            MessageBox.Show("Error in " + cbDRLs[i].Text + ":" +
+                                "\n\nThe length of Reader CL Floor Limit must be 12",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
+                        strlist.Add(tbRCFLs[i].Text);
+                        sending_msg += Module1.charStr(0x1a) + string.Join(Module1.charStr(0x1c), strlist);
+                        strlist.Clear();
+                    }
+
+                    // Sending T5F message to device
+                    //Console.WriteLine(sending_msg);
+                    Module1.SIOOutput("T5F" + sending_msg);
+                    rtn = PPDMain.DLL.Getter(UIC.PktType.STX, "T5F", sending_msg, out receive_buf);
+                    Module1.SIOInput(rtn, 1, receive_buf);
+                    if (rtn != 0)
+                    {
+                        MessageBox.Show("Setting " + cbDRLs[i].Text + " failed." ,"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+                    if (!Module1.ByteArrayToString(receive_buf).Equals("T5G0"))
+                    {
+                        MessageBox.Show("Setting " + cbDRLs[i].Text + " failed:\n\n" + Module1.ByteArrayToString(receive_buf)
+                            , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+                }
+            }
+
+            //Debug.WriteLine(sending_msg);
+
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
@@ -155,7 +360,14 @@ namespace PP791
                             }
                             if (sl.StartsWith("RCTL=") || sl.StartsWith("RCTL ="))
                             {
-                                tbRCTLs[drl_index].Text = sl.Substring(sl.IndexOf("=") + 1).Trim();
+                                string limitValue = sl.Substring(sl.IndexOf("=") + 1).Trim();
+                                if (limitValue.Equals("FFFFFFFFFFFF"))
+                                {
+                                    tbRCTLs[drl_index].Text = "";
+                                } else
+                                {
+                                    tbRCTLs[drl_index].Text = limitValue;
+                                }
                             }
                             if (sl.StartsWith("CVMLCheck"))
                             {
@@ -166,7 +378,15 @@ namespace PP791
                             }
                             if (sl.StartsWith("CVML=") || sl.StartsWith("CVML ="))
                             {
-                                tbCVMs[drl_index].Text = sl.Substring(sl.IndexOf("=") + 1).Trim();
+                                string limitValue = sl.Substring(sl.IndexOf("=") + 1).Trim();
+                                if (limitValue.Equals("FFFFFFFFFFFF"))
+                                {
+                                    tbCVMs[drl_index].Text = "";
+                                }
+                                else
+                                {
+                                    tbCVMs[drl_index].Text = limitValue;
+                                }
                             }
                             if (sl.StartsWith("RCFLCheck"))
                             {
@@ -177,7 +397,15 @@ namespace PP791
                             }
                             if (sl.StartsWith("RCFL=") || sl.StartsWith("RCFL ="))
                             {
-                                tbRCFLs[drl_index].Text = sl.Substring(sl.IndexOf("=") + 1).Trim();
+                                string limitValue = sl.Substring(sl.IndexOf("=") + 1).Trim();
+                                if (limitValue.Equals("FFFFFFFFFFFF"))
+                                {
+                                    tbRCFLs[drl_index].Text = "";
+                                }
+                                else
+                                {
+                                    tbRCFLs[drl_index].Text = limitValue;
+                                }
                             }
                         }
                     }
@@ -438,6 +666,33 @@ namespace PP791
             {
                 tbRCFL4.Enabled = false;
             }
+        }
+
+        private void btnDeleteAll_Click(object sender, EventArgs e)
+        {
+            int rtn;
+            byte[] receive_buf;
+
+            Module1.SIOOutput("T5H");
+            rtn = PPDMain.DLL.Getter(UIC.PktType.STX, "T5H", "", out receive_buf);
+            Module1.SIOInput(rtn, 1, receive_buf);
+            if (rtn != 0)
+            {
+                MessageBox.Show("Communicating Error.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (!Module1.ByteArrayToString(receive_buf).Equals("T5I0"))
+            {
+                MessageBox.Show("Deleting DRL failed.\n\nError Message: " + Module1.ByteArrayToString(receive_buf), 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (sender.Equals(btnDeleteAll))
+                {
+                    MessageBox.Show("Deleting DRL Success.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            return;
         }
     }
 }

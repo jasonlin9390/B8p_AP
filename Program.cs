@@ -15,8 +15,8 @@ namespace PP791
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new PPDMain());
-            Application.Run(new DRL());
+            Application.Run(new PPDMain());
+            //Application.Run(new DRL());
         }
     }
 }
