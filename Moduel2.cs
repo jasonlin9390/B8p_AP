@@ -34,6 +34,55 @@ namespace PP791
             CVM_Result_byte[6] = "E";
             CVM_Result_byte[7] = "F";
         }
+
+
+
+        public static char CCalculateLRC(string toEncode)
+        {
+            byte[] bytes = Encoding.ASCII.GetBytes(toEncode);
+            byte LRC = 0;
+            for (int i = 1; i < bytes.Length; i++)
+            {
+                LRC ^= bytes[i];
+            }
+            return Convert.ToChar(LRC);
+        }
+
+        static public byte LRCCalculator(byte[] input, int length)
+        {
+            byte LRC = 0;
+
+            if (length > input.Length)
+            {
+                length = input.Length;
+            }
+
+            for (int i = 1; i < length; i++)
+            {
+                LRC ^= input[i];
+            }
+
+            return LRC;
+        }
+
+        static public string PaddingLRCToString(string input)
+        {
+            byte[] byteString;
+            byte LRC = 0x00;
+            
+            byteString = Encoding.ASCII.GetBytes(input);
+
+            for (int i = 0; i < byteString.Length; i++)
+            {
+                Console.Write("{0:X2}", byteString[i]);
+                LRC ^= byteString[i];
+            }
+
+            Console.WriteLine(LRC.ToString());
+
+            return input + LRC.ToString();
+        }
+
         static public bool getHexDigit(byte ch_hex, ref byte bt_hex)
         {
             if ((ch_hex >= 0x30) & (ch_hex <= 0x39))
