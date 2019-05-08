@@ -3,6 +3,7 @@ using System.Text;
 using System.IO;
 using System.IO.Ports;
 using System.Threading;
+using System.Collections;
 
 namespace PP791
 {
@@ -13,6 +14,8 @@ namespace PP791
         STX = 1
     }
 
+
+
     public sealed class SerialPortManager
     {
         private static readonly Lazy<SerialPortManager> lazy = new Lazy<SerialPortManager>(() => new SerialPortManager());
@@ -22,6 +25,7 @@ namespace PP791
         private Thread _readThread;
         private volatile bool _keepReading;
         private string _readMessage;
+        private Queue _messageQueue;
 
         private SerialPortManager()
         {
@@ -29,6 +33,7 @@ namespace PP791
             _readThread = null;
             _keepReading = false;
             _readMessage = "";
+            _messageQueue = new Queue();
         }
 
         /// <summary>
@@ -164,6 +169,7 @@ namespace PP791
                 OnSerialPortOpened(this, false);
         }
 
+
         public void SendPacketCommand(PP791.PktType type, string message)
         {
             if (_serialPort.IsOpen)
@@ -258,18 +264,21 @@ namespace PP791
                     try
                     {
                         
-                        _serialPort.Read(readBuffer, 0, _serialPort.ReadBufferSize);
+                        int count = _serialPort.Read(readBuffer, 0, _serialPort.ReadBufferSize);
                         string temp = Encoding.ASCII.GetString(readBuffer);
+
 
                         if (temp.Length == 1 && temp == Convert.ToChar(0x06).ToString())
                         {
                             Console.WriteLine("ACK");
+                            _messageQueue.Enqueue(temp);
                         }
                         else
                         {
                             _readMessage += temp;
                         }
                         Console.WriteLine(_readMessage);
+
 
                         if (_readMessage.Contains(Convert.ToChar(0x0F).ToString()) &&
                             _readMessage.Contains(Convert.ToChar(0x0E).ToString()))

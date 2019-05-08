@@ -108,8 +108,7 @@ namespace PP791
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            //serialPort.SendString(Module1.charStr(0x0F) + tbMessage.Text + Module1.charStr(0x0E));
-            serialPort.SendString("18201904065134750");
+            //AsynchronousSocketListener.StartListening();
         }
 
         private void btnSend1_Click(object sender, EventArgs e)

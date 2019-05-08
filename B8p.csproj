@@ -136,6 +136,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerialPortManager.cs" />
     <Compile Include="TLV.cs" />
+    <Compile Include="VCAS.cs" />
     <Compile Include="_Status.cs" />
     <EmbeddedResource Include="BankSideForm.resx">
       <DependentUpon>BankSideForm.cs</DependentUpon>
