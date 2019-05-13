@@ -395,6 +395,7 @@
             // tbCommLog
             // 
             this.tbCommLog.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tbCommLog.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.tbCommLog.Location = new System.Drawing.Point(3, 3);
             this.tbCommLog.Multiline = true;
             this.tbCommLog.Name = "tbCommLog";
@@ -484,7 +485,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.30275F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 104F));
             this.tableLayoutPanel3.Controls.Add(this.cbparity, 3, 1);
             this.tableLayoutPanel3.Controls.Add(this.cbDataBits, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.lbParity, 3, 0);
@@ -509,7 +510,7 @@
             this.cbparity.FormattingEnabled = true;
             this.cbparity.Items.AddRange(new object[] {
             "None"});
-            this.cbparity.Location = new System.Drawing.Point(354, 51);
+            this.cbparity.Location = new System.Drawing.Point(353, 51);
             this.cbparity.Name = "cbparity";
             this.cbparity.Size = new System.Drawing.Size(110, 23);
             this.cbparity.TabIndex = 7;
@@ -521,7 +522,7 @@
             this.cbDataBits.FormattingEnabled = true;
             this.cbDataBits.Items.AddRange(new object[] {
             "8"});
-            this.cbDataBits.Location = new System.Drawing.Point(237, 51);
+            this.cbDataBits.Location = new System.Drawing.Point(236, 51);
             this.cbDataBits.Name = "cbDataBits";
             this.cbDataBits.Size = new System.Drawing.Size(111, 23);
             this.cbDataBits.TabIndex = 6;
@@ -530,7 +531,7 @@
             // 
             this.lbParity.AutoSize = true;
             this.lbParity.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbParity.Location = new System.Drawing.Point(354, 0);
+            this.lbParity.Location = new System.Drawing.Point(353, 0);
             this.lbParity.Name = "lbParity";
             this.lbParity.Size = new System.Drawing.Size(110, 48);
             this.lbParity.TabIndex = 5;
@@ -541,7 +542,7 @@
             // 
             this.lbLength.AutoSize = true;
             this.lbLength.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbLength.Location = new System.Drawing.Point(237, 0);
+            this.lbLength.Location = new System.Drawing.Point(236, 0);
             this.lbLength.Name = "lbLength";
             this.lbLength.Size = new System.Drawing.Size(111, 48);
             this.lbLength.TabIndex = 4;
@@ -554,7 +555,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 48);
+            this.label1.Size = new System.Drawing.Size(79, 48);
             this.label1.TabIndex = 0;
             this.label1.Text = "COM";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -565,7 +566,7 @@
             this.cbCOM.FormattingEnabled = true;
             this.cbCOM.Location = new System.Drawing.Point(3, 51);
             this.cbCOM.Name = "cbCOM";
-            this.cbCOM.Size = new System.Drawing.Size(80, 23);
+            this.cbCOM.Size = new System.Drawing.Size(79, 23);
             this.cbCOM.TabIndex = 1;
             this.cbCOM.Click += new System.EventHandler(this.cbCOM_Click);
             // 
@@ -579,7 +580,7 @@
             "38400",
             "57600",
             "115200"});
-            this.cbBuadRate.Location = new System.Drawing.Point(89, 51);
+            this.cbBuadRate.Location = new System.Drawing.Point(88, 51);
             this.cbBuadRate.Name = "cbBuadRate";
             this.cbBuadRate.Size = new System.Drawing.Size(142, 23);
             this.cbBuadRate.TabIndex = 2;
@@ -588,7 +589,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(89, 0);
+            this.label2.Location = new System.Drawing.Point(88, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(142, 48);
             this.label2.TabIndex = 3;

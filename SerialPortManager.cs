@@ -3,7 +3,7 @@ using System.Text;
 using System.IO;
 using System.IO.Ports;
 using System.Threading;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace PP791
 {
@@ -14,7 +14,11 @@ namespace PP791
         STX = 1
     }
 
-
+    public enum Status
+    {
+        idle,
+        waitting
+    }
 
     public sealed class SerialPortManager
     {
@@ -22,18 +26,14 @@ namespace PP791
         public static SerialPortManager Instance { get { return lazy.Value; } }
 
         private SerialPort _serialPort;
-        private Thread _readThread;
-        private volatile bool _keepReading;
-        private string _readMessage;
-        private Queue _messageQueue;
+        private Queue<byte[]> _messageQueue;
 
         private SerialPortManager()
         {
             _serialPort = new SerialPort();
-            _readThread = null;
-            _keepReading = false;
-            _readMessage = "";
-            _messageQueue = new Queue();
+            _messageQueue = new Queue<byte[]>();
+
+            _serialPort.DataReceived += new SerialDataReceivedEventHandler(RataReceive_test);
         }
 
         /// <summary>
@@ -44,12 +44,13 @@ namespace PP791
         /// <summary>
         /// Update received data from the serial port to the event subscriber
         /// </summary>
-        public event EventHandler<string> OnDataSent;
+        public event EventHandler<byte[]> OnDataSent;
 
         /// <summary>
         /// Update received data from the serial port to the event subscriber
         /// </summary>
-        public event EventHandler<string> OnDataReceived;
+        public event EventHandler<byte[]> OnDataReceived;
+
 
         /// <summary>
         /// Update TRUE/FALSE for the serial port connection to the event subscriber
@@ -89,11 +90,11 @@ namespace PP791
                 _serialPort.StopBits = stopbits;
                 _serialPort.Handshake = handshake;
 
-                _serialPort.ReadTimeout = 1000;
-                _serialPort.WriteTimeout = 1000;
+                _serialPort.ReadTimeout = 200;
+                _serialPort.WriteTimeout = 200;
 
                 _serialPort.Open();
-                StartReading();
+                //StartReading();
             }
             catch (IOException)
             {
@@ -159,7 +160,6 @@ namespace PP791
         /// </summary>
         public void Close()
         {
-            StopReading();
             _serialPort.Close();
 
             if (OnStatusChanged != null)
@@ -167,6 +167,238 @@ namespace PP791
 
             if (OnSerialPortOpened != null)
                 OnSerialPortOpened(this, false);
+        }
+
+        public int SendAndWait_test(PktType type, string head, string body, bool sparator_after_haed = true)
+        {
+            string prefix = String.Empty;
+            string suffix = String.Empty;
+            string sparator = String.Empty;
+
+            if (!_serialPort.IsOpen)
+            {
+                throw new System.InvalidOperationException("Serial Port is not open.");
+            }
+
+            if (type == PktType.SI)
+            {
+                prefix = Convert.ToChar(0x0F).ToString();
+                suffix = Convert.ToChar(0x0E).ToString();
+            }
+            else if (type == PktType.STX)
+            {
+                prefix = Convert.ToChar(0x02).ToString();
+                suffix = Convert.ToChar(0x03).ToString();
+            }
+            else
+            {
+                // TODO: VCAS command handling
+            }
+
+            if (sparator_after_haed == true)
+            {
+                sparator = Convert.ToChar(0x1A).ToString();
+            }
+
+            string packed_meaasge = prefix + head + sparator + body + suffix;
+            byte lrc = Moduel2.LRCCalculator(Encoding.ASCII.GetBytes(packed_meaasge), packed_meaasge.Length);
+
+            // Sending message
+            try
+            {
+                _serialPort.Write(packed_meaasge + Convert.ToChar(lrc).ToString());
+                if (OnDataSent != null)
+                {
+                    byte[] data_sent = Encoding.ASCII.GetBytes(packed_meaasge + Convert.ToChar(lrc).ToString());
+                    OnDataSent(this, data_sent);
+                }
+            }
+            catch (Exception)
+            {
+                throw new System.Exception("Sending message failed.");
+                //Console.WriteLine("Sending message failed.");
+                //return -1;
+            }
+
+
+            // Waitting for ACK from the reader
+            try
+            {
+                byte[] response = new byte[1];
+                int count = _serialPort.Read(response, 0, 1);
+
+                if (OnDataReceived != null)
+                {
+                    OnDataReceived(this, response);
+                }
+
+                switch (response[0])
+                {
+                    case 0x06:
+                    case 0x04:
+                        Console.WriteLine("Received 0x{0} from the reader.", response[0].ToString("X2"));
+                        Console.WriteLine("BytesToWrite = {0}", _serialPort.BytesToWrite);
+                        break;
+
+                    case 0x15:
+                        // NAK
+                        throw new System.Exception("Received NAK from reader: Incorrect LRC.");
+                    //Console.WriteLine("Received NAK from the reader.");
+                    //Console.WriteLine("BytesToWrite = {0}", _serialPort.BytesToWrite);
+                    //return -3;
+
+                    default:
+                        // Unknown
+                        throw new System.Exception("Unknown response: 0x" + response[0].ToString("X2"));
+                        //Console.WriteLine("Received 0x{0} from the reader.", response[0].ToString("X2"));
+                        //return -4;
+
+                }
+            }
+            catch (TimeoutException)
+            {
+                // Reader no response;
+                if (_serialPort.BytesToWrite > 0)
+                {
+                    _serialPort.DiscardOutBuffer();
+                }
+                throw new System.TimeoutException("Timeout: No response");
+                //Console.WriteLine("Reader no response.");
+                //Console.WriteLine("BytesToWrite = {0}", _serialPort.BytesToWrite);
+                //return -2;
+            }
+            catch (Exception)
+            {
+                throw new System.Exception("Receiving response failed.");
+                //Console.WriteLine("Receiving response failed.");
+                //Console.WriteLine("BytesToWrite = {0}", _serialPort.BytesToWrite);
+                //return -5;
+            }
+
+            return 0;
+        }
+
+        public void RataReceive_test(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            int bytes = _serialPort.BytesToRead;
+            byte[] buffer = new byte[bytes];
+            _serialPort.Read(buffer, 0, bytes);
+
+            if (bytes == 1)
+            {
+                if (buffer[0] == 0x06 || buffer[0] == 0x15 || buffer[0] == 0x04)
+                {
+                    // <ACK>, <NAK> or <EOT>
+                }
+            }
+
+            if ( (buffer[0] == 0x02 && buffer[bytes - 2] == 0x03)
+                || (buffer[0] == 0x0F && buffer[bytes - 2] == 0x0E) )
+            {
+
+                if (buffer[bytes - 1] == Moduel2.LRCCalculator(buffer, bytes - 1))
+                {
+                    // Correct LRC, sending <ACK>
+                    _serialPort.Write(Convert.ToChar(0x06).ToString());
+                    Console.WriteLine("Sending ACK");
+
+                    // Enqueue received message
+                    _messageQueue.Enqueue(buffer);
+
+                }
+                else
+                {
+                    // Incorrect LRC, sending <NAK>
+                    _serialPort.Write(Convert.ToChar(0x15).ToString());
+                    Console.WriteLine("Sending NAK");
+                }
+            }
+            else
+            {
+                // TODO: VCAS command handling
+            }
+
+            if (OnDataReceived != null)
+            {
+                OnDataReceived(this, buffer);
+            }
+
+            string receivedData = null;
+            for (int i = 0; i < bytes; i++)
+            {
+                if (buffer[i] < 0x20)
+                {
+                    receivedData += "<" + buffer[i].ToString("X2") + ">";
+                }
+                else
+                {
+                    receivedData += Convert.ToChar(buffer[i]).ToString();
+                }
+            }
+            Console.WriteLine(receivedData);
+
+        }
+
+        public void SendString_test(string message)
+        {
+            if (_serialPort.IsOpen)
+            {
+                try
+                {
+                    if (_serialPort.BytesToRead > 0)
+                    {
+                        Console.WriteLine("OOO");
+                    }
+                    _serialPort.Write(message);
+
+                    if (OnStatusChanged != null)
+                        OnStatusChanged(this, string.Format(
+                        "Message sent: {0}",
+                        message));
+                }
+                catch (Exception ex)
+                {
+                    if (OnStatusChanged != null)
+                        OnStatusChanged(this, string.Format(
+                            "Failed to send string: {0}",
+                            ex.Message));
+                }
+
+                byte[] readBuffer = new byte[_serialPort.ReadBufferSize + 1];
+                try
+                {
+                    int count = _serialPort.Read(readBuffer, 0, _serialPort.ReadBufferSize);
+                    string receivedData = null;
+                    if (count > 1 && readBuffer[0] == 0x06)
+                    {
+                        Console.WriteLine("ACK");
+                        _serialPort.Write(Convert.ToChar(0x06).ToString());
+                    }
+
+                    if (count > 0)
+                    {
+                        for (int i = 0; i < count; i++)
+                        {
+                            if (readBuffer[i] < 0x20)
+                            {
+                                receivedData += "<" + readBuffer[i].ToString("X2") + ">";
+                            }
+                            else
+                            {
+                                receivedData += Convert.ToChar(readBuffer[i]).ToString();
+                            }
+                        }
+                        Console.WriteLine(receivedData);
+
+                        
+
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
         }
 
 
@@ -196,7 +428,7 @@ namespace PP791
 
                     if (OnDataSent != null)
                     {
-                        OnDataSent(this, pktCommand + Moduel2.CCalculateLRC(pktCommand));
+                        
                     }
 
                 }
@@ -230,101 +462,6 @@ namespace PP791
                         OnStatusChanged(this, string.Format(
                             "Failed to send string: {0}",
                             ex.Message));
-                }
-            }
-        }
-
-        private void StartReading()
-        {
-            if (!_keepReading)
-            {
-                _keepReading = true;
-                _readThread = new Thread(ReadPort);
-                _readThread.Start();
-            }
-        }
-
-        private void StopReading()
-        {
-            if (_keepReading)
-            {
-                _keepReading = false;
-                _readThread.Join();
-                _readThread = null;
-            }
-        }
-
-        private void ReadPort()
-        {
-            while (_keepReading)
-            {
-                if (_serialPort.IsOpen)
-                {
-                    byte[] readBuffer = new byte[_serialPort.ReadBufferSize + 1];
-                    try
-                    {
-                        
-                        int count = _serialPort.Read(readBuffer, 0, _serialPort.ReadBufferSize);
-                        string temp = Encoding.ASCII.GetString(readBuffer);
-
-
-                        if (temp.Length == 1 && temp == Convert.ToChar(0x06).ToString())
-                        {
-                            Console.WriteLine("ACK");
-                            _messageQueue.Enqueue(temp);
-                        }
-                        else
-                        {
-                            _readMessage += temp;
-                        }
-                        Console.WriteLine(_readMessage);
-
-
-                        if (_readMessage.Contains(Convert.ToChar(0x0F).ToString()) &&
-                            _readMessage.Contains(Convert.ToChar(0x0E).ToString()))
-                        {
-                            Console.WriteLine(_readMessage);
-                        }
-                        else if (_readMessage.Contains(Convert.ToChar(0x02).ToString()) &&
-                            _readMessage.Contains(Convert.ToChar(0x03).ToString()))
-                        {
-                            Console.WriteLine(_readMessage);
-                        }
-
-                        /*
-                        string data = Encoding.ASCII.GetString(readBuffer);
-                        string receivedData = null;
-
-                        if (count > 0)
-                        {
-                            for (int i = 0; i < count; i++)
-                            {
-                                if (readBuffer[i] < 0x20)
-                                {
-                                    receivedData += "<" + readBuffer[i].ToString("X2") + ">";
-                                }
-                                else
-                                {
-                                    receivedData +=  Convert.ToChar(readBuffer[i]).ToString();
-                                }
-                            }
-                            Console.WriteLine(receivedData);
-
-                            SendString(Convert.ToChar(0x06).ToString());
-                        }
-                        
-
-                        if (OnDataReceived != null)
-                            OnDataReceived(this, receivedData);
-
-                        */
-                    }
-                    catch (TimeoutException) { }
-                }
-                else
-                {
-                    TimeSpan waitTime = new TimeSpan(0, 0, 0, 0, 50);
-                    Thread.Sleep(waitTime);
                 }
             }
         }

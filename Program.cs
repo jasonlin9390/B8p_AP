@@ -17,6 +17,7 @@ namespace PP791
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new PPDMain());
             Application.Run(new Bezel8Plus());
+            //Application.Run(new SettingForm());
         }
     }
 }

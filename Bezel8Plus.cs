@@ -11,9 +11,15 @@ using System.IO.Ports;
 
 namespace PP791
 {
+    enum Directions
+    {
+        Send,
+        Receive
+    }
+
     public partial class Bezel8Plus : Form
     {
-        private delegate void SafeCallDelegate(object sender, string text);
+        private delegate void SafeCallDelegate(object sender, byte[] text);
         private SerialPortManager serialPort = SerialPortManager.Instance;
 
         public Bezel8Plus()
@@ -26,37 +32,64 @@ namespace PP791
 
             serialPort.OnDataReceived += DataReceivingLog;
             serialPort.OnDataSent += DataSendingLog;
+
         }
 
-        private void DataReceivingLog(object sender, string data)
+        private void PrintLog(PP791.Directions dir, byte[] message)
         {
+            string time = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff");
 
-            if (tbCommLog.InvokeRequired)
+            string direction = String.Empty;
+            if (dir == PP791.Directions.Send)
             {
-                var d = new SafeCallDelegate(DataReceivingLog);
-                Invoke(d, new object[] { sender, data });
+                direction = "\tSent:";
             }
             else
             {
+                direction = "\tReceived:";
+            }
+
+            tbCommLog.AppendText(time + direction + Environment.NewLine);
+            tbCommLog.AppendText(Moduel2.ConvertLoggingMessage(message) + Environment.NewLine + Environment.NewLine);
+        }
+
+
+        private void DataReceivingLog(object sender, byte[] text)
+        {
+            
+            if (tbCommLog.InvokeRequired)
+            {
+                var d = new SafeCallDelegate(DataReceivingLog);
+                Invoke(d, new object[] { sender, text });
+            }
+            else
+            {
+                /*
                 string now = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff");
                 tbCommLog.AppendText(now + " Received:" + Environment.NewLine);
                 tbCommLog.AppendText(data + Environment.NewLine + Environment.NewLine);
+                */
+                PrintLog(PP791.Directions.Receive, text);
             }
+            
         }
 
-        private void DataSendingLog(object sender, string data)
+        private void DataSendingLog(object sender, byte[] text)
         {
 
             if (tbCommLog.InvokeRequired)
             {
                 var d = new SafeCallDelegate(DataSendingLog);
-                Invoke(d, new object[] { sender, data });
+                Invoke(d, new object[] { sender, text });
             }
             else
             {
+                /*
                 string now = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff");
                 tbCommLog.AppendText(now + " Sent:" + Environment.NewLine);
-                tbCommLog.AppendText(data + Environment.NewLine + Environment.NewLine);
+                tbCommLog.AppendText(text + Environment.NewLine + Environment.NewLine);
+                */
+                PrintLog(PP791.Directions.Send, text);
             }
         }
 
@@ -68,6 +101,7 @@ namespace PP791
             {
                 return;
             }
+
             serialPort.Open(
             cbCOM.SelectedItem.ToString(),
             9600,
@@ -82,6 +116,7 @@ namespace PP791
                 btnCloseCom.Enabled = true;
                 gbComSetting.Enabled = false;
             }
+
             
         }
 
@@ -109,6 +144,18 @@ namespace PP791
         private void btnSend_Click(object sender, EventArgs e)
         {
             //AsynchronousSocketListener.StartListening();
+            //string send = Convert.ToChar(0x0F).ToString() + "18201905083134750" + Convert.ToChar(0x0E).ToString();
+            //serialPort.SendString_test(send + Moduel2.CCalculateLRC(send));
+            //serialPort.SendPacketCommand(PP791.PktType.SI, "18201904065134750");
+
+            try
+            {
+                serialPort.SendAndWait_test(PP791.PktType.SI, "18", "2019051311150", false);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void btnSend1_Click(object sender, EventArgs e)
@@ -125,7 +172,7 @@ namespace PP791
 
             //serialPort.SendPacketCommand(PP791.PktType.STX, tbMessage1.Text);
 
-            serialPort.SendPacketCommand(PP791.PktType.SI, "18201904065134750");
+            //serialPort.SendPacketCommand(PP791.PktType.SI, "18201904065134750");
 
 
         }
