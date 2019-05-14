@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanelBase = new System.Windows.Forms.TableLayoutPanel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tcMain = new System.Windows.Forms.TabControl();
+            this.tpTransaction = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -45,7 +45,7 @@
             this.lbAmountAuth = new System.Windows.Forms.Label();
             this.cbTxnType = new System.Windows.Forms.ComboBox();
             this.lbTxnType = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tpConfig = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.btnSend3 = new System.Windows.Forms.Button();
@@ -73,9 +73,13 @@
             this.cbCOM = new System.Windows.Forms.ComboBox();
             this.cbBuadRate = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.lbStopBits = new System.Windows.Forms.Label();
+            this.lbHandShake = new System.Windows.Forms.Label();
+            this.cbStopBits = new System.Windows.Forms.ComboBox();
+            this.cbHandShake = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanelBase.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tcMain.SuspendLayout();
+            this.tpTransaction.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.gbTxnData.SuspendLayout();
@@ -91,39 +95,39 @@
             // 
             this.tableLayoutPanelBase.ColumnCount = 1;
             this.tableLayoutPanelBase.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelBase.Controls.Add(this.tabControl1, 0, 1);
+            this.tableLayoutPanelBase.Controls.Add(this.tcMain, 0, 1);
             this.tableLayoutPanelBase.Controls.Add(this.gbGeneral, 0, 0);
             this.tableLayoutPanelBase.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelBase.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelBase.Name = "tableLayoutPanelBase";
             this.tableLayoutPanelBase.RowCount = 2;
-            this.tableLayoutPanelBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.84231F));
-            this.tableLayoutPanelBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.15768F));
+            this.tableLayoutPanelBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.49866F));
+            this.tableLayoutPanelBase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.50134F));
             this.tableLayoutPanelBase.Size = new System.Drawing.Size(1289, 746);
             this.tableLayoutPanelBase.TabIndex = 0;
             // 
-            // tabControl1
+            // tcMain
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(3, 151);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1283, 592);
-            this.tabControl1.TabIndex = 3;
+            this.tcMain.Controls.Add(this.tpTransaction);
+            this.tcMain.Controls.Add(this.tpConfig);
+            this.tcMain.Controls.Add(this.tabPage3);
+            this.tcMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcMain.Location = new System.Drawing.Point(3, 140);
+            this.tcMain.Name = "tcMain";
+            this.tcMain.SelectedIndex = 0;
+            this.tcMain.Size = new System.Drawing.Size(1283, 603);
+            this.tcMain.TabIndex = 3;
             // 
-            // tabPage1
+            // tpTransaction
             // 
-            this.tabPage1.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1275, 566);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tpTransaction.Controls.Add(this.tableLayoutPanel1);
+            this.tpTransaction.Location = new System.Drawing.Point(4, 22);
+            this.tpTransaction.Name = "tpTransaction";
+            this.tpTransaction.Padding = new System.Windows.Forms.Padding(3);
+            this.tpTransaction.Size = new System.Drawing.Size(1275, 577);
+            this.tpTransaction.TabIndex = 0;
+            this.tpTransaction.Text = "Transaction";
+            this.tpTransaction.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -137,7 +141,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1269, 560);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1269, 571);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupBox1
@@ -145,7 +149,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(628, 554);
+            this.groupBox1.Size = new System.Drawing.Size(628, 565);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
@@ -161,7 +165,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.30686F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.69314F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(629, 554);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(629, 565);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // gbTxnData
@@ -179,7 +183,7 @@
             this.gbTxnData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbTxnData.Location = new System.Drawing.Point(3, 3);
             this.gbTxnData.Name = "gbTxnData";
-            this.gbTxnData.Size = new System.Drawing.Size(623, 245);
+            this.gbTxnData.Size = new System.Drawing.Size(623, 249);
             this.gbTxnData.TabIndex = 0;
             this.gbTxnData.TabStop = false;
             this.gbTxnData.Text = "Txn Related Data";
@@ -190,6 +194,8 @@
             this.tbCurrencyExp.Name = "tbCurrencyExp";
             this.tbCurrencyExp.Size = new System.Drawing.Size(135, 22);
             this.tbCurrencyExp.TabIndex = 9;
+            this.tbCurrencyExp.Text = "02";
+            this.tbCurrencyExp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbCurrencyCode
             // 
@@ -197,6 +203,8 @@
             this.tbCurrencyCode.Name = "tbCurrencyCode";
             this.tbCurrencyCode.Size = new System.Drawing.Size(135, 22);
             this.tbCurrencyCode.TabIndex = 8;
+            this.tbCurrencyCode.Text = "0840";
+            this.tbCurrencyCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbCurrencyCode
             // 
@@ -266,21 +274,21 @@
             // lbTxnType
             // 
             this.lbTxnType.AutoSize = true;
-            this.lbTxnType.Location = new System.Drawing.Point(22, 27);
+            this.lbTxnType.Location = new System.Drawing.Point(22, 29);
             this.lbTxnType.Name = "lbTxnType";
             this.lbTxnType.Size = new System.Drawing.Size(86, 12);
             this.lbTxnType.TabIndex = 0;
             this.lbTxnType.Text = "Transaction Type";
             // 
-            // tabPage2
+            // tpConfig
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1275, 566);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tpConfig.Location = new System.Drawing.Point(4, 22);
+            this.tpConfig.Name = "tpConfig";
+            this.tpConfig.Padding = new System.Windows.Forms.Padding(3);
+            this.tpConfig.Size = new System.Drawing.Size(1275, 577);
+            this.tpConfig.TabIndex = 1;
+            this.tpConfig.Text = "Configuration";
+            this.tpConfig.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -290,7 +298,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1275, 566);
+            this.tabPage3.Size = new System.Drawing.Size(1275, 577);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -314,13 +322,13 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.87719F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 115F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 95F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(574, 439);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(574, 450);
             this.tableLayoutPanel4.TabIndex = 2;
             // 
             // btnSend3
             // 
             this.btnSend3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSend3.Location = new System.Drawing.Point(499, 231);
+            this.btnSend3.Location = new System.Drawing.Point(499, 242);
             this.btnSend3.Name = "btnSend3";
             this.btnSend3.Size = new System.Drawing.Size(72, 109);
             this.btnSend3.TabIndex = 5;
@@ -330,9 +338,9 @@
             // btnSend2
             // 
             this.btnSend2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSend2.Location = new System.Drawing.Point(499, 115);
+            this.btnSend2.Location = new System.Drawing.Point(499, 120);
             this.btnSend2.Name = "btnSend2";
-            this.btnSend2.Size = new System.Drawing.Size(72, 110);
+            this.btnSend2.Size = new System.Drawing.Size(72, 116);
             this.btnSend2.TabIndex = 4;
             this.btnSend2.Text = "Send";
             this.btnSend2.UseVisualStyleBackColor = true;
@@ -347,7 +355,7 @@
             // 
             // tbMessage2
             // 
-            this.tbMessage2.Location = new System.Drawing.Point(3, 115);
+            this.tbMessage2.Location = new System.Drawing.Point(3, 120);
             this.tbMessage2.Multiline = true;
             this.tbMessage2.Name = "tbMessage2";
             this.tbMessage2.Size = new System.Drawing.Size(490, 106);
@@ -355,7 +363,7 @@
             // 
             // tbMessage3
             // 
-            this.tbMessage3.Location = new System.Drawing.Point(3, 231);
+            this.tbMessage3.Location = new System.Drawing.Point(3, 242);
             this.tbMessage3.Multiline = true;
             this.tbMessage3.Name = "tbMessage3";
             this.tbMessage3.Size = new System.Drawing.Size(490, 106);
@@ -366,7 +374,7 @@
             this.btnSend1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSend1.Location = new System.Drawing.Point(499, 3);
             this.btnSend1.Name = "btnSend1";
-            this.btnSend1.Size = new System.Drawing.Size(72, 106);
+            this.btnSend1.Size = new System.Drawing.Size(72, 111);
             this.btnSend1.TabIndex = 3;
             this.btnSend1.Text = "Send";
             this.btnSend1.UseVisualStyleBackColor = true;
@@ -401,7 +409,7 @@
             this.tbCommLog.Name = "tbCommLog";
             this.tbCommLog.ReadOnly = true;
             this.tbCommLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbCommLog.Size = new System.Drawing.Size(695, 560);
+            this.tbCommLog.Size = new System.Drawing.Size(695, 571);
             this.tbCommLog.TabIndex = 0;
             // 
             // gbGeneral
@@ -415,15 +423,16 @@
             this.gbGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbGeneral.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.gbGeneral.Location = new System.Drawing.Point(3, 3);
+            this.gbGeneral.MinimumSize = new System.Drawing.Size(1283, 100);
             this.gbGeneral.Name = "gbGeneral";
-            this.gbGeneral.Size = new System.Drawing.Size(1283, 142);
+            this.gbGeneral.Size = new System.Drawing.Size(1283, 131);
             this.gbGeneral.TabIndex = 0;
             this.gbGeneral.TabStop = false;
             this.gbGeneral.Text = "General Setting";
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(818, 95);
+            this.btnStop.Location = new System.Drawing.Point(806, 73);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(91, 44);
             this.btnStop.TabIndex = 5;
@@ -432,14 +441,14 @@
             // 
             // tbMessage
             // 
-            this.tbMessage.Location = new System.Drawing.Point(921, 107);
+            this.tbMessage.Location = new System.Drawing.Point(976, 90);
             this.tbMessage.Name = "tbMessage";
-            this.tbMessage.Size = new System.Drawing.Size(355, 24);
+            this.tbMessage.Size = new System.Drawing.Size(294, 24);
             this.tbMessage.TabIndex = 4;
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(818, 40);
+            this.btnSend.Location = new System.Drawing.Point(806, 23);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(91, 44);
             this.btnSend.TabIndex = 3;
@@ -449,10 +458,11 @@
             // 
             // btnCloseCom
             // 
+            this.btnCloseCom.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnCloseCom.Enabled = false;
-            this.btnCloseCom.Location = new System.Drawing.Point(702, 40);
+            this.btnCloseCom.Location = new System.Drawing.Point(688, 20);
             this.btnCloseCom.Name = "btnCloseCom";
-            this.btnCloseCom.Size = new System.Drawing.Size(110, 99);
+            this.btnCloseCom.Size = new System.Drawing.Size(112, 108);
             this.btnCloseCom.TabIndex = 2;
             this.btnCloseCom.Text = "CLOSE";
             this.btnCloseCom.UseVisualStyleBackColor = true;
@@ -460,9 +470,10 @@
             // 
             // btnOpenCom
             // 
-            this.btnOpenCom.Location = new System.Drawing.Point(586, 40);
+            this.btnOpenCom.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnOpenCom.Location = new System.Drawing.Point(580, 20);
             this.btnOpenCom.Name = "btnOpenCom";
-            this.btnOpenCom.Size = new System.Drawing.Size(110, 99);
+            this.btnOpenCom.Size = new System.Drawing.Size(108, 108);
             this.btnOpenCom.TabIndex = 1;
             this.btnOpenCom.Text = "OPEN";
             this.btnOpenCom.UseVisualStyleBackColor = true;
@@ -474,18 +485,19 @@
             this.gbComSetting.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbComSetting.Location = new System.Drawing.Point(3, 20);
             this.gbComSetting.Name = "gbComSetting";
-            this.gbComSetting.Size = new System.Drawing.Size(577, 119);
+            this.gbComSetting.Size = new System.Drawing.Size(577, 108);
             this.gbComSetting.TabIndex = 0;
             this.gbComSetting.TabStop = false;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 5;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.69725F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.30275F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 104F));
+            this.tableLayoutPanel3.ColumnCount = 6;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.31707F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.68293F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 78F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99F));
             this.tableLayoutPanel3.Controls.Add(this.cbparity, 3, 1);
             this.tableLayoutPanel3.Controls.Add(this.cbDataBits, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.lbParity, 3, 0);
@@ -494,13 +506,17 @@
             this.tableLayoutPanel3.Controls.Add(this.cbCOM, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.cbBuadRate, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.label2, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lbStopBits, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lbHandShake, 5, 0);
+            this.tableLayoutPanel3.Controls.Add(this.cbStopBits, 4, 1);
+            this.tableLayoutPanel3.Controls.Add(this.cbHandShake, 5, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 20);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(571, 96);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(571, 85);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // cbparity
@@ -510,9 +526,9 @@
             this.cbparity.FormattingEnabled = true;
             this.cbparity.Items.AddRange(new object[] {
             "None"});
-            this.cbparity.Location = new System.Drawing.Point(353, 51);
+            this.cbparity.Location = new System.Drawing.Point(286, 45);
             this.cbparity.Name = "cbparity";
-            this.cbparity.Size = new System.Drawing.Size(110, 23);
+            this.cbparity.Size = new System.Drawing.Size(83, 23);
             this.cbparity.TabIndex = 7;
             // 
             // cbDataBits
@@ -522,18 +538,18 @@
             this.cbDataBits.FormattingEnabled = true;
             this.cbDataBits.Items.AddRange(new object[] {
             "8"});
-            this.cbDataBits.Location = new System.Drawing.Point(236, 51);
+            this.cbDataBits.Location = new System.Drawing.Point(208, 45);
             this.cbDataBits.Name = "cbDataBits";
-            this.cbDataBits.Size = new System.Drawing.Size(111, 23);
+            this.cbDataBits.Size = new System.Drawing.Size(72, 23);
             this.cbDataBits.TabIndex = 6;
             // 
             // lbParity
             // 
             this.lbParity.AutoSize = true;
-            this.lbParity.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbParity.Location = new System.Drawing.Point(353, 0);
+            this.lbParity.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbParity.Location = new System.Drawing.Point(286, 27);
             this.lbParity.Name = "lbParity";
-            this.lbParity.Size = new System.Drawing.Size(110, 48);
+            this.lbParity.Size = new System.Drawing.Size(83, 15);
             this.lbParity.TabIndex = 5;
             this.lbParity.Text = "Parity";
             this.lbParity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -541,10 +557,10 @@
             // lbLength
             // 
             this.lbLength.AutoSize = true;
-            this.lbLength.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbLength.Location = new System.Drawing.Point(236, 0);
+            this.lbLength.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbLength.Location = new System.Drawing.Point(208, 27);
             this.lbLength.Name = "lbLength";
-            this.lbLength.Size = new System.Drawing.Size(111, 48);
+            this.lbLength.Size = new System.Drawing.Size(72, 15);
             this.lbLength.TabIndex = 4;
             this.lbLength.Text = "Data Bits";
             this.lbLength.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -552,10 +568,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label1.Location = new System.Drawing.Point(3, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 48);
+            this.label1.Size = new System.Drawing.Size(91, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "COM";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -564,9 +580,9 @@
             // 
             this.cbCOM.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbCOM.FormattingEnabled = true;
-            this.cbCOM.Location = new System.Drawing.Point(3, 51);
+            this.cbCOM.Location = new System.Drawing.Point(3, 45);
             this.cbCOM.Name = "cbCOM";
-            this.cbCOM.Size = new System.Drawing.Size(79, 23);
+            this.cbCOM.Size = new System.Drawing.Size(91, 23);
             this.cbCOM.TabIndex = 1;
             this.cbCOM.Click += new System.EventHandler(this.cbCOM_Click);
             // 
@@ -580,21 +596,65 @@
             "38400",
             "57600",
             "115200"});
-            this.cbBuadRate.Location = new System.Drawing.Point(88, 51);
+            this.cbBuadRate.Location = new System.Drawing.Point(100, 45);
             this.cbBuadRate.Name = "cbBuadRate";
-            this.cbBuadRate.Size = new System.Drawing.Size(142, 23);
+            this.cbBuadRate.Size = new System.Drawing.Size(102, 23);
             this.cbBuadRate.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(88, 0);
+            this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label2.Location = new System.Drawing.Point(100, 27);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 48);
+            this.label2.Size = new System.Drawing.Size(102, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "Buadrate";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbStopBits
+            // 
+            this.lbStopBits.AutoSize = true;
+            this.lbStopBits.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbStopBits.Location = new System.Drawing.Point(375, 27);
+            this.lbStopBits.Name = "lbStopBits";
+            this.lbStopBits.Size = new System.Drawing.Size(93, 15);
+            this.lbStopBits.TabIndex = 8;
+            this.lbStopBits.Text = "Stop Bits";
+            this.lbStopBits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbHandShake
+            // 
+            this.lbHandShake.AutoSize = true;
+            this.lbHandShake.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbHandShake.Location = new System.Drawing.Point(474, 27);
+            this.lbHandShake.Name = "lbHandShake";
+            this.lbHandShake.Size = new System.Drawing.Size(94, 15);
+            this.lbHandShake.TabIndex = 9;
+            this.lbHandShake.Text = "Hand Shake";
+            this.lbHandShake.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cbStopBits
+            // 
+            this.cbStopBits.Enabled = false;
+            this.cbStopBits.FormattingEnabled = true;
+            this.cbStopBits.Items.AddRange(new object[] {
+            "1"});
+            this.cbStopBits.Location = new System.Drawing.Point(375, 45);
+            this.cbStopBits.Name = "cbStopBits";
+            this.cbStopBits.Size = new System.Drawing.Size(93, 23);
+            this.cbStopBits.TabIndex = 10;
+            // 
+            // cbHandShake
+            // 
+            this.cbHandShake.Enabled = false;
+            this.cbHandShake.FormattingEnabled = true;
+            this.cbHandShake.Items.AddRange(new object[] {
+            "None"});
+            this.cbHandShake.Location = new System.Drawing.Point(474, 45);
+            this.cbHandShake.Name = "cbHandShake";
+            this.cbHandShake.Size = new System.Drawing.Size(93, 23);
+            this.cbHandShake.TabIndex = 11;
             // 
             // Bezel8Plus
             // 
@@ -605,8 +665,8 @@
             this.Name = "Bezel8Plus";
             this.Text = "Bezel8Plus";
             this.tableLayoutPanelBase.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tcMain.ResumeLayout(false);
+            this.tpTransaction.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.gbTxnData.ResumeLayout(false);
@@ -630,13 +690,13 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelBase;
         private System.Windows.Forms.GroupBox gbGeneral;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl tcMain;
+        private System.Windows.Forms.TabPage tpTransaction;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.GroupBox gbTxnData;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tpConfig;
         private System.Windows.Forms.GroupBox gbComSetting;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label1;
@@ -673,5 +733,9 @@
         private System.Windows.Forms.TextBox tbMessage3;
         private System.Windows.Forms.Button btnSend1;
         private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Label lbStopBits;
+        private System.Windows.Forms.Label lbHandShake;
+        private System.Windows.Forms.ComboBox cbStopBits;
+        private System.Windows.Forms.ComboBox cbHandShake;
     }
 }

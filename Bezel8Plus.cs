@@ -22,6 +22,8 @@ namespace PP791
         private delegate void SafeCallDelegate(object sender, byte[] text);
         private SerialPortManager serialPort = SerialPortManager.Instance;
 
+        private MainConfigForm configForm;
+
         public Bezel8Plus()
         {
             InitializeComponent();
@@ -29,10 +31,28 @@ namespace PP791
             cbDataBits.SelectedIndex = 0;
             cbparity.SelectedIndex = 0;
             cbTxnType.SelectedIndex = 0;
+            cbHandShake.SelectedIndex = 0;
+            cbStopBits.SelectedIndex = 0;
 
             serialPort.OnDataReceived += DataReceivingLog;
             serialPort.OnDataSent += DataSendingLog;
 
+            configForm = new MainConfigForm();
+
+
+            AddFormToTab(configForm, tpConfig);
+
+        }
+
+
+        private void AddFormToTab(Form form, TabPage tabPage)
+        {
+            form.TopLevel = false;
+            form.Visible = true;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+
+            tabPage.Controls.Add(form);
         }
 
         private void PrintLog(PP791.Directions dir, byte[] message)
@@ -42,11 +62,11 @@ namespace PP791
             string direction = String.Empty;
             if (dir == PP791.Directions.Send)
             {
-                direction = "\tSent:";
+                direction = "\bSent:";
             }
             else
             {
-                direction = "\tReceived:";
+                direction = "\bReceived:";
             }
 
             tbCommLog.AppendText(time + direction + Environment.NewLine);
@@ -160,21 +180,9 @@ namespace PP791
 
         private void btnSend1_Click(object sender, EventArgs e)
         {
-            //serialPort.SendString(Module1.charStr(0x02) + "T6C" + Module1.charStr(0x03) + "\"");
-            /*
-            byte[] bb = new byte[] { 0x02, 0x54, 0x36, 0x43, 0x03 };
-            byte test = Moduel2.LRCCalculator(bb, 5);
-            Console.WriteLine(test);
-            */
-
-            //char cc = Moduel2.CCalculateLRC(Module1.charStr(0x02) + "T6C" + Module1.charStr(0x03));
-            //Console.WriteLine(cc);
-
-            //serialPort.SendPacketCommand(PP791.PktType.STX, tbMessage1.Text);
-
-            //serialPort.SendPacketCommand(PP791.PktType.SI, "18201904065134750");
-
 
         }
+
+
     }
 }
