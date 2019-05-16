@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbConfigData = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.gbControls = new System.Windows.Forms.GroupBox();
             this.btnDeleteItem = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.listBoxConfig = new System.Windows.Forms.ListBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnSetSelected = new System.Windows.Forms.Button();
+            this.btnSetAll = new System.Windows.Forms.Button();
             this.btnOpen = new System.Windows.Forms.Button();
             this.gbConfigData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -56,14 +56,14 @@
             // dataGridView1
             // 
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 18);
@@ -77,8 +77,8 @@
             this.gbControls.Controls.Add(this.btnDeleteItem);
             this.gbControls.Controls.Add(this.btnAddItem);
             this.gbControls.Controls.Add(this.listBoxConfig);
-            this.gbControls.Controls.Add(this.button3);
-            this.gbControls.Controls.Add(this.button2);
+            this.gbControls.Controls.Add(this.btnSetSelected);
+            this.gbControls.Controls.Add(this.btnSetAll);
             this.gbControls.Controls.Add(this.btnOpen);
             this.gbControls.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbControls.Location = new System.Drawing.Point(0, 0);
@@ -119,23 +119,24 @@
             this.listBoxConfig.TabIndex = 3;
             this.listBoxConfig.SelectedIndexChanged += new System.EventHandler(this.listBoxConfig_SelectedIndexChanged);
             // 
-            // button3
+            // btnSetSelected
             // 
-            this.button3.Location = new System.Drawing.Point(6, 266);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(95, 97);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnSetSelected.Location = new System.Drawing.Point(6, 266);
+            this.btnSetSelected.Name = "btnSetSelected";
+            this.btnSetSelected.Size = new System.Drawing.Size(95, 97);
+            this.btnSetSelected.TabIndex = 2;
+            this.btnSetSelected.Text = "Set Selected";
+            this.btnSetSelected.UseVisualStyleBackColor = true;
+            this.btnSetSelected.Click += new System.EventHandler(this.btnSetSelected_Click);
             // 
-            // button2
+            // btnSetAll
             // 
-            this.button2.Location = new System.Drawing.Point(6, 163);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 97);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnSetAll.Location = new System.Drawing.Point(6, 163);
+            this.btnSetAll.Name = "btnSetAll";
+            this.btnSetAll.Size = new System.Drawing.Size(95, 97);
+            this.btnSetAll.TabIndex = 1;
+            this.btnSetAll.Text = "Set All";
+            this.btnSetAll.UseVisualStyleBackColor = true;
             // 
             // btnOpen
             // 
@@ -167,8 +168,8 @@
 
         private System.Windows.Forms.GroupBox gbConfigData;
         private System.Windows.Forms.GroupBox gbControls;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnSetSelected;
+        private System.Windows.Forms.Button btnSetAll;
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.ListBox listBoxConfig;
         private System.Windows.Forms.DataGridView dataGridView1;

@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Threading;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace PP791
 {
@@ -33,7 +34,7 @@ namespace PP791
             _serialPort = new SerialPort();
             _messageQueue = new Queue<byte[]>();
 
-            _serialPort.DataReceived += new SerialDataReceivedEventHandler(RataReceive_test);
+            //_serialPort.DataReceived += new SerialDataReceivedEventHandler(RataReceive_test);
         }
 
         /// <summary>
@@ -61,6 +62,8 @@ namespace PP791
         /// Return TRUE if the serial port is currently connected
         /// </summary>
         public bool IsOpen { get { return _serialPort.IsOpen; } }
+
+        public int GetWriteBufferSize() { return _serialPort.WriteBufferSize; }
 
         /// <summary>
         /// Open the serial port connection using basic serial port settings
@@ -169,6 +172,144 @@ namespace PP791
                 OnSerialPortOpened(this, false);
         }
 
+        public void WriteAndReadMessage(PktType type, string head, string body, int readTimeOut, out byte[] responseOut)
+        {
+            string prefix = String.Empty;
+            string suffix = String.Empty;
+            responseOut = null;
+
+            if (type == PktType.SI)
+            {
+                prefix = Convert.ToChar(0x0F).ToString();
+                suffix = Convert.ToChar(0x0E).ToString();
+            }
+            else if (type == PktType.STX)
+            {
+                prefix = Convert.ToChar(0x02).ToString();
+                suffix = Convert.ToChar(0x03).ToString();
+            }
+            else
+            {
+                // TODO: VCAS command handling
+            }
+
+            string packed_meaasge = prefix + head + body + suffix;
+            byte lrc = Moduel2.LRCCalculator(Encoding.ASCII.GetBytes(packed_meaasge), packed_meaasge.Length);
+
+            if (_serialPort.BytesToRead > 0)
+                _serialPort.DiscardInBuffer();
+
+            if (_serialPort.BytesToWrite > 0)
+                _serialPort.DiscardOutBuffer();
+
+            // Sending message
+            try
+            {
+                _serialPort.Write(packed_meaasge + Convert.ToChar(lrc).ToString());
+                if (OnDataSent != null)
+                {
+                    byte[] data_sent = Encoding.ASCII.GetBytes(packed_meaasge + Convert.ToChar(lrc).ToString());
+                    OnDataSent(this, data_sent);
+                }
+            }
+            catch(InvalidOperationException)
+            {
+                throw new System.InvalidOperationException("Serial Port is not open.");
+            }
+            catch (Exception)
+            {
+                throw new System.Exception("Sending message failed.");
+            }
+
+
+            // Check if ACK is received
+            try
+            {
+                byte[] controlCode = new byte[1];
+                _serialPort.Read(controlCode, 0, 1);
+
+                if (OnDataReceived != null)
+                {
+                    OnDataReceived(this, controlCode);
+                }
+
+                switch (controlCode[0])
+                {
+                    case 0x06:
+                    case 0x04:
+                        Console.WriteLine("Received 0x{0} from the reader.", controlCode[0].ToString("X2"));
+                        //Console.WriteLine("BytesToWrite = {0}", _serialPort.BytesToWrite);
+                        break;
+
+                    case 0x15:
+                        // NAK
+                        throw new System.Exception("Received NAK from reader: Incorrect LRC.");
+
+                    default:
+                        // Unknown
+                        throw new System.Exception("Unknown response: 0x" + controlCode[0].ToString("X2"));
+                }
+            }
+            catch (TimeoutException)
+            {
+                // Reader no response;
+                throw new System.TimeoutException("Timeout: No ACK");
+            }
+            catch (Exception)
+            {
+                throw new System.Exception("Waitting ACK failed.");
+            }
+
+            // Retrieve return message from reader
+            Stopwatch s = new Stopwatch();
+            s.Start();
+            while (s.Elapsed < TimeSpan.FromMilliseconds(_serialPort.ReadTimeout))
+            {
+                if (_serialPort.BytesToRead > 0)
+                    break;
+            }
+            s.Stop();
+
+            if (_serialPort.BytesToRead > 0)
+            {
+                int bytes = _serialPort.BytesToRead;
+                responseOut = new byte[bytes];
+                _serialPort.Read(responseOut, 0, bytes);
+                if (OnDataReceived != null)
+                {
+                    OnDataReceived(this, responseOut);
+                }
+
+                // Well recevied, check LRC
+                if (responseOut[bytes - 1] == Moduel2.LRCCalculator(responseOut, bytes - 1))
+                {
+                    // Send ACK
+                    _serialPort.Write(Convert.ToChar(0x06).ToString());
+                    if (OnDataSent != null)
+                    {
+                        byte[] ack = Encoding.ASCII.GetBytes(Convert.ToChar(0x06).ToString());
+                        OnDataSent(this, ack);
+                    }
+                }
+                else
+                {
+                    // Send NAK
+                    _serialPort.Write(Convert.ToChar(0x15).ToString());
+                    if (OnDataSent != null)
+                    {
+                        byte[] nak = Encoding.ASCII.GetBytes(Convert.ToChar(0x15).ToString());
+                        OnDataSent(this, nak);
+                    }
+                }
+            }
+            else
+            {
+                throw new System.TimeoutException("Timeout: No response");
+            }
+
+        }
+        
+
         public int SendAndWait_test(PktType type, string head, string body, bool sparator_after_haed = true)
         {
             string prefix = String.Empty;
@@ -237,7 +378,7 @@ namespace PP791
                     case 0x06:
                     case 0x04:
                         Console.WriteLine("Received 0x{0} from the reader.", response[0].ToString("X2"));
-                        Console.WriteLine("BytesToWrite = {0}", _serialPort.BytesToWrite);
+                        //Console.WriteLine("BytesToWrite = {0}", _serialPort.BytesToWrite);
                         break;
 
                     case 0x15:
@@ -278,33 +419,51 @@ namespace PP791
             return 0;
         }
 
+
         public void RataReceive_test(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
-        {
+        {         
+            if (_serialPort.BytesToRead <= 0) return;
+
             int bytes = _serialPort.BytesToRead;
             byte[] buffer = new byte[bytes];
             _serialPort.Read(buffer, 0, bytes);
 
+            Console.WriteLine($"RataReceive_test Received: {debug_test(buffer)}");
+            if (OnDataReceived != null)
+            {
+                OnDataReceived(this, buffer);
+            }
+            /*
             if (bytes == 1)
             {
+                
                 if (buffer[0] == 0x06 || buffer[0] == 0x15 || buffer[0] == 0x04)
                 {
                     // <ACK>, <NAK> or <EOT>
                 }
             }
-
-            if ( (buffer[0] == 0x02 && buffer[bytes - 2] == 0x03)
-                || (buffer[0] == 0x0F && buffer[bytes - 2] == 0x0E) )
+            if ((buffer[0] == 0x02 && buffer[bytes - 2] == 0x03) ||(buffer[0] == 0x0F && buffer[bytes - 2] == 0x0E))
             {
-
                 if (buffer[bytes - 1] == Moduel2.LRCCalculator(buffer, bytes - 1))
                 {
-                    // Correct LRC, sending <ACK>
+                    // LRC correct
+                    // Enqueue received message
+                    lock (_messageQueue)
+                    {
+                        _messageQueue.Enqueue(buffer);
+                        Console.WriteLine($"Enqueued: {debug_test(buffer)}");
+                    }
+
+                    // sending <ACK>
                     _serialPort.Write(Convert.ToChar(0x06).ToString());
+                    if (OnDataSent != null)
+                    {
+                        byte[] data_sent = Encoding.ASCII.GetBytes(Convert.ToChar(0x06).ToString());
+                        OnDataSent(this, data_sent);
+                    }
                     Console.WriteLine("Sending ACK");
 
-                    // Enqueue received message
-                    _messageQueue.Enqueue(buffer);
-
+                    
                 }
                 else
                 {
@@ -317,27 +476,51 @@ namespace PP791
             {
                 // TODO: VCAS command handling
             }
+            */
+        }
 
-            if (OnDataReceived != null)
-            {
-                OnDataReceived(this, buffer);
-            }
+        public string debug_test(byte[] byteArray)
+        {
+            string s = String.Empty;
 
-            string receivedData = null;
-            for (int i = 0; i < bytes; i++)
+            for (int i = 0; i < byteArray.Length; i++)
             {
-                if (buffer[i] < 0x20)
+                if (byteArray[i] < 0x20)
                 {
-                    receivedData += "<" + buffer[i].ToString("X2") + ">";
+                    s += "<" + byteArray[i].ToString("X2") + ">";
                 }
                 else
                 {
-                    receivedData += Convert.ToChar(buffer[i]).ToString();
+                    s += Convert.ToChar(byteArray[i]).ToString();
                 }
             }
-            Console.WriteLine(receivedData);
+            return s;
 
         }
+        
+        public string Dequeue(bool includeLRC = false)
+        {
+            string sMessage = String.Empty;
+            byte[] bMessage = null;
+
+            lock (_messageQueue)
+            {
+                if (_messageQueue.Count > 0)
+                {
+                    bMessage = _messageQueue.Dequeue();
+                }
+            }
+
+            if (bMessage != null)
+            {
+                int end = includeLRC ? 0 : 1;
+                sMessage = Encoding.ASCII.GetString(bMessage, 0, bMessage.Length - end);
+            }
+
+            return sMessage;
+        }
+        
+
 
         public void SendString_test(string message)
         {

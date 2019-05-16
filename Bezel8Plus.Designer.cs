@@ -428,7 +428,6 @@
             this.gbGeneral.Size = new System.Drawing.Size(1283, 131);
             this.gbGeneral.TabIndex = 0;
             this.gbGeneral.TabStop = false;
-            this.gbGeneral.Text = "General Setting";
             // 
             // btnStop
             // 
@@ -497,7 +496,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 78F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel3.Controls.Add(this.cbparity, 3, 1);
             this.tableLayoutPanel3.Controls.Add(this.cbDataBits, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.lbParity, 3, 0);
@@ -526,7 +525,7 @@
             this.cbparity.FormattingEnabled = true;
             this.cbparity.Items.AddRange(new object[] {
             "None"});
-            this.cbparity.Location = new System.Drawing.Point(286, 45);
+            this.cbparity.Location = new System.Drawing.Point(285, 45);
             this.cbparity.Name = "cbparity";
             this.cbparity.Size = new System.Drawing.Size(83, 23);
             this.cbparity.TabIndex = 7;
@@ -538,7 +537,7 @@
             this.cbDataBits.FormattingEnabled = true;
             this.cbDataBits.Items.AddRange(new object[] {
             "8"});
-            this.cbDataBits.Location = new System.Drawing.Point(208, 45);
+            this.cbDataBits.Location = new System.Drawing.Point(207, 45);
             this.cbDataBits.Name = "cbDataBits";
             this.cbDataBits.Size = new System.Drawing.Size(72, 23);
             this.cbDataBits.TabIndex = 6;
@@ -547,7 +546,7 @@
             // 
             this.lbParity.AutoSize = true;
             this.lbParity.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbParity.Location = new System.Drawing.Point(286, 27);
+            this.lbParity.Location = new System.Drawing.Point(285, 27);
             this.lbParity.Name = "lbParity";
             this.lbParity.Size = new System.Drawing.Size(83, 15);
             this.lbParity.TabIndex = 5;
@@ -558,7 +557,7 @@
             // 
             this.lbLength.AutoSize = true;
             this.lbLength.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbLength.Location = new System.Drawing.Point(208, 27);
+            this.lbLength.Location = new System.Drawing.Point(207, 27);
             this.lbLength.Name = "lbLength";
             this.lbLength.Size = new System.Drawing.Size(72, 15);
             this.lbLength.TabIndex = 4;
@@ -571,7 +570,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label1.Location = new System.Drawing.Point(3, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 15);
+            this.label1.Size = new System.Drawing.Size(90, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "COM";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -582,7 +581,7 @@
             this.cbCOM.FormattingEnabled = true;
             this.cbCOM.Location = new System.Drawing.Point(3, 45);
             this.cbCOM.Name = "cbCOM";
-            this.cbCOM.Size = new System.Drawing.Size(91, 23);
+            this.cbCOM.Size = new System.Drawing.Size(90, 23);
             this.cbCOM.TabIndex = 1;
             this.cbCOM.Click += new System.EventHandler(this.cbCOM_Click);
             // 
@@ -596,7 +595,7 @@
             "38400",
             "57600",
             "115200"});
-            this.cbBuadRate.Location = new System.Drawing.Point(100, 45);
+            this.cbBuadRate.Location = new System.Drawing.Point(99, 45);
             this.cbBuadRate.Name = "cbBuadRate";
             this.cbBuadRate.Size = new System.Drawing.Size(102, 23);
             this.cbBuadRate.TabIndex = 2;
@@ -605,7 +604,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label2.Location = new System.Drawing.Point(100, 27);
+            this.label2.Location = new System.Drawing.Point(99, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(102, 15);
             this.label2.TabIndex = 3;
@@ -616,7 +615,7 @@
             // 
             this.lbStopBits.AutoSize = true;
             this.lbStopBits.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbStopBits.Location = new System.Drawing.Point(375, 27);
+            this.lbStopBits.Location = new System.Drawing.Point(374, 27);
             this.lbStopBits.Name = "lbStopBits";
             this.lbStopBits.Size = new System.Drawing.Size(93, 15);
             this.lbStopBits.TabIndex = 8;
@@ -627,9 +626,9 @@
             // 
             this.lbHandShake.AutoSize = true;
             this.lbHandShake.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbHandShake.Location = new System.Drawing.Point(474, 27);
+            this.lbHandShake.Location = new System.Drawing.Point(473, 27);
             this.lbHandShake.Name = "lbHandShake";
-            this.lbHandShake.Size = new System.Drawing.Size(94, 15);
+            this.lbHandShake.Size = new System.Drawing.Size(95, 15);
             this.lbHandShake.TabIndex = 9;
             this.lbHandShake.Text = "Hand Shake";
             this.lbHandShake.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -640,7 +639,7 @@
             this.cbStopBits.FormattingEnabled = true;
             this.cbStopBits.Items.AddRange(new object[] {
             "1"});
-            this.cbStopBits.Location = new System.Drawing.Point(375, 45);
+            this.cbStopBits.Location = new System.Drawing.Point(374, 45);
             this.cbStopBits.Name = "cbStopBits";
             this.cbStopBits.Size = new System.Drawing.Size(93, 23);
             this.cbStopBits.TabIndex = 10;
@@ -651,7 +650,7 @@
             this.cbHandShake.FormattingEnabled = true;
             this.cbHandShake.Items.AddRange(new object[] {
             "None"});
-            this.cbHandShake.Location = new System.Drawing.Point(474, 45);
+            this.cbHandShake.Location = new System.Drawing.Point(473, 45);
             this.cbHandShake.Name = "cbHandShake";
             this.cbHandShake.Size = new System.Drawing.Size(93, 23);
             this.cbHandShake.TabIndex = 11;

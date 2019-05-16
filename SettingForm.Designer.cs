@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             this.gbSetConfig = new System.Windows.Forms.GroupBox();
-            this.tbFilename = new System.Windows.Forms.TextBox();
-            this.btnLoadFiles = new System.Windows.Forms.Button();
             this.btnSetAll = new System.Windows.Forms.Button();
+            this.btnLoadFiles = new System.Windows.Forms.Button();
+            this.tbFilename = new System.Windows.Forms.TextBox();
             this.gbSetTime = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lbYear = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbYear = new System.Windows.Forms.TextBox();
-            this.tbMonth = new System.Windows.Forms.TextBox();
-            this.tbDay = new System.Windows.Forms.TextBox();
-            this.lbHour = new System.Windows.Forms.Label();
-            this.lbMinute = new System.Windows.Forms.Label();
-            this.lbSecond = new System.Windows.Forms.Label();
-            this.tbHour = new System.Windows.Forms.TextBox();
-            this.tbMinute = new System.Windows.Forms.TextBox();
-            this.tbSecond = new System.Windows.Forms.TextBox();
-            this.btnSetTime = new System.Windows.Forms.Button();
             this.btnGetTime = new System.Windows.Forms.Button();
+            this.btnSetTime = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbSecond = new System.Windows.Forms.TextBox();
+            this.tbMinute = new System.Windows.Forms.TextBox();
+            this.tbHour = new System.Windows.Forms.TextBox();
+            this.lbSecond = new System.Windows.Forms.Label();
+            this.lbMinute = new System.Windows.Forms.Label();
+            this.lbHour = new System.Windows.Forms.Label();
+            this.tbDay = new System.Windows.Forms.TextBox();
+            this.tbMonth = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lbYear = new System.Windows.Forms.Label();
+            this.tbYear = new System.Windows.Forms.TextBox();
             this.gbSetConfig.SuspendLayout();
             this.gbSetTime.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -65,13 +65,15 @@
             this.gbSetConfig.TabStop = false;
             this.gbSetConfig.Text = "Configuration Setting";
             // 
-            // tbFilename
+            // btnSetAll
             // 
-            this.tbFilename.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tbFilename.Location = new System.Drawing.Point(3, 18);
-            this.tbFilename.Name = "tbFilename";
-            this.tbFilename.Size = new System.Drawing.Size(217, 22);
-            this.tbFilename.TabIndex = 0;
+            this.btnSetAll.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSetAll.Location = new System.Drawing.Point(220, 40);
+            this.btnSetAll.Name = "btnSetAll";
+            this.btnSetAll.Size = new System.Drawing.Size(98, 78);
+            this.btnSetAll.TabIndex = 2;
+            this.btnSetAll.Text = "Set All";
+            this.btnSetAll.UseVisualStyleBackColor = true;
             // 
             // btnLoadFiles
             // 
@@ -83,15 +85,13 @@
             this.btnLoadFiles.Text = "Load Files";
             this.btnLoadFiles.UseVisualStyleBackColor = true;
             // 
-            // btnSetAll
+            // tbFilename
             // 
-            this.btnSetAll.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSetAll.Location = new System.Drawing.Point(220, 40);
-            this.btnSetAll.Name = "btnSetAll";
-            this.btnSetAll.Size = new System.Drawing.Size(98, 78);
-            this.btnSetAll.TabIndex = 2;
-            this.btnSetAll.Text = "Set All";
-            this.btnSetAll.UseVisualStyleBackColor = true;
+            this.tbFilename.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tbFilename.Location = new System.Drawing.Point(3, 18);
+            this.tbFilename.Name = "tbFilename";
+            this.tbFilename.Size = new System.Drawing.Size(217, 22);
+            this.tbFilename.TabIndex = 0;
             // 
             // gbSetTime
             // 
@@ -104,6 +104,28 @@
             this.gbSetTime.TabIndex = 1;
             this.gbSetTime.TabStop = false;
             this.gbSetTime.Text = "Time Setting";
+            // 
+            // btnGetTime
+            // 
+            this.btnGetTime.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnGetTime.Location = new System.Drawing.Point(236, 74);
+            this.btnGetTime.Name = "btnGetTime";
+            this.btnGetTime.Size = new System.Drawing.Size(86, 51);
+            this.btnGetTime.TabIndex = 2;
+            this.btnGetTime.Text = "Get Time";
+            this.btnGetTime.UseVisualStyleBackColor = true;
+            this.btnGetTime.Click += new System.EventHandler(this.btnGetTime_Click);
+            // 
+            // btnSetTime
+            // 
+            this.btnSetTime.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSetTime.Location = new System.Drawing.Point(236, 18);
+            this.btnSetTime.Name = "btnSetTime";
+            this.btnSetTime.Size = new System.Drawing.Size(86, 51);
+            this.btnSetTime.TabIndex = 1;
+            this.btnSetTime.Text = "Set Time";
+            this.btnSetTime.UseVisualStyleBackColor = true;
+            this.btnSetTime.Click += new System.EventHandler(this.btnSetTime_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -134,79 +156,29 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(233, 107);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // lbYear
+            // tbSecond
             // 
-            this.lbYear.AutoSize = true;
-            this.lbYear.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbYear.Location = new System.Drawing.Point(3, 14);
-            this.lbYear.Name = "lbYear";
-            this.lbYear.Size = new System.Drawing.Size(71, 12);
-            this.lbYear.TabIndex = 0;
-            this.lbYear.Text = "Year";
+            this.tbSecond.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbSecond.Location = new System.Drawing.Point(157, 81);
+            this.tbSecond.Name = "tbSecond";
+            this.tbSecond.Size = new System.Drawing.Size(73, 22);
+            this.tbSecond.TabIndex = 11;
             // 
-            // label2
+            // tbMinute
             // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label2.Location = new System.Drawing.Point(80, 14);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Month";
+            this.tbMinute.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbMinute.Location = new System.Drawing.Point(80, 81);
+            this.tbMinute.Name = "tbMinute";
+            this.tbMinute.Size = new System.Drawing.Size(71, 22);
+            this.tbMinute.TabIndex = 10;
             // 
-            // label3
+            // tbHour
             // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label3.Location = new System.Drawing.Point(157, 14);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Day";
-            // 
-            // tbYear
-            // 
-            this.tbYear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbYear.Location = new System.Drawing.Point(3, 29);
-            this.tbYear.Name = "tbYear";
-            this.tbYear.Size = new System.Drawing.Size(71, 22);
-            this.tbYear.TabIndex = 3;
-            // 
-            // tbMonth
-            // 
-            this.tbMonth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbMonth.Location = new System.Drawing.Point(80, 29);
-            this.tbMonth.Name = "tbMonth";
-            this.tbMonth.Size = new System.Drawing.Size(71, 22);
-            this.tbMonth.TabIndex = 4;
-            // 
-            // tbDay
-            // 
-            this.tbDay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbDay.Location = new System.Drawing.Point(157, 29);
-            this.tbDay.Name = "tbDay";
-            this.tbDay.Size = new System.Drawing.Size(73, 22);
-            this.tbDay.TabIndex = 5;
-            // 
-            // lbHour
-            // 
-            this.lbHour.AutoSize = true;
-            this.lbHour.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbHour.Location = new System.Drawing.Point(3, 66);
-            this.lbHour.Name = "lbHour";
-            this.lbHour.Size = new System.Drawing.Size(71, 12);
-            this.lbHour.TabIndex = 6;
-            this.lbHour.Text = "Hour";
-            // 
-            // lbMinute
-            // 
-            this.lbMinute.AutoSize = true;
-            this.lbMinute.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbMinute.Location = new System.Drawing.Point(80, 66);
-            this.lbMinute.Name = "lbMinute";
-            this.lbMinute.Size = new System.Drawing.Size(71, 12);
-            this.lbMinute.TabIndex = 7;
-            this.lbMinute.Text = "Minute";
+            this.tbHour.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbHour.Location = new System.Drawing.Point(3, 81);
+            this.tbHour.Name = "tbHour";
+            this.tbHour.Size = new System.Drawing.Size(71, 22);
+            this.tbHour.TabIndex = 9;
             // 
             // lbSecond
             // 
@@ -218,51 +190,79 @@
             this.lbSecond.TabIndex = 8;
             this.lbSecond.Text = "Second";
             // 
-            // tbHour
+            // lbMinute
             // 
-            this.tbHour.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbHour.Location = new System.Drawing.Point(3, 81);
-            this.tbHour.Name = "tbHour";
-            this.tbHour.Size = new System.Drawing.Size(71, 22);
-            this.tbHour.TabIndex = 9;
+            this.lbMinute.AutoSize = true;
+            this.lbMinute.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbMinute.Location = new System.Drawing.Point(80, 66);
+            this.lbMinute.Name = "lbMinute";
+            this.lbMinute.Size = new System.Drawing.Size(71, 12);
+            this.lbMinute.TabIndex = 7;
+            this.lbMinute.Text = "Minute";
             // 
-            // tbMinute
+            // lbHour
             // 
-            this.tbMinute.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbMinute.Location = new System.Drawing.Point(80, 81);
-            this.tbMinute.Name = "tbMinute";
-            this.tbMinute.Size = new System.Drawing.Size(71, 22);
-            this.tbMinute.TabIndex = 10;
+            this.lbHour.AutoSize = true;
+            this.lbHour.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbHour.Location = new System.Drawing.Point(3, 66);
+            this.lbHour.Name = "lbHour";
+            this.lbHour.Size = new System.Drawing.Size(71, 12);
+            this.lbHour.TabIndex = 6;
+            this.lbHour.Text = "Hour";
             // 
-            // tbSecond
+            // tbDay
             // 
-            this.tbSecond.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbSecond.Location = new System.Drawing.Point(157, 81);
-            this.tbSecond.Name = "tbSecond";
-            this.tbSecond.Size = new System.Drawing.Size(73, 22);
-            this.tbSecond.TabIndex = 11;
+            this.tbDay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbDay.Location = new System.Drawing.Point(157, 29);
+            this.tbDay.Name = "tbDay";
+            this.tbDay.Size = new System.Drawing.Size(73, 22);
+            this.tbDay.TabIndex = 5;
             // 
-            // btnSetTime
+            // tbMonth
             // 
-            this.btnSetTime.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSetTime.Location = new System.Drawing.Point(236, 18);
-            this.btnSetTime.Name = "btnSetTime";
-            this.btnSetTime.Size = new System.Drawing.Size(86, 51);
-            this.btnSetTime.TabIndex = 1;
-            this.btnSetTime.Text = "Set Time";
-            this.btnSetTime.UseVisualStyleBackColor = true;
-            this.btnSetTime.Click += new System.EventHandler(this.btnSetTime_Click);
+            this.tbMonth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbMonth.Location = new System.Drawing.Point(80, 29);
+            this.tbMonth.Name = "tbMonth";
+            this.tbMonth.Size = new System.Drawing.Size(71, 22);
+            this.tbMonth.TabIndex = 4;
             // 
-            // btnGetTime
+            // label3
             // 
-            this.btnGetTime.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnGetTime.Location = new System.Drawing.Point(236, 74);
-            this.btnGetTime.Name = "btnGetTime";
-            this.btnGetTime.Size = new System.Drawing.Size(86, 51);
-            this.btnGetTime.TabIndex = 2;
-            this.btnGetTime.Text = "Get Time";
-            this.btnGetTime.UseVisualStyleBackColor = true;
-            this.btnGetTime.Click += new System.EventHandler(this.btnGetTime_Click);
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label3.Location = new System.Drawing.Point(157, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(73, 12);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Day";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label2.Location = new System.Drawing.Point(80, 14);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 12);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Month";
+            // 
+            // lbYear
+            // 
+            this.lbYear.AutoSize = true;
+            this.lbYear.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbYear.Location = new System.Drawing.Point(3, 14);
+            this.lbYear.Name = "lbYear";
+            this.lbYear.Size = new System.Drawing.Size(71, 12);
+            this.lbYear.TabIndex = 0;
+            this.lbYear.Text = "Year";
+            // 
+            // tbYear
+            // 
+            this.tbYear.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbYear.Location = new System.Drawing.Point(3, 29);
+            this.tbYear.Name = "tbYear";
+            this.tbYear.Size = new System.Drawing.Size(71, 22);
+            this.tbYear.TabIndex = 3;
             // 
             // SettingForm
             // 

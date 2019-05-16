@@ -15,7 +15,7 @@ namespace PP791
 {
     public partial class TerAppConfigForm : Form
     {
-
+        private SerialPortManager serialPort = SerialPortManager.Instance;
         private OpenFileDialog openFileDialog;
 
         private DataSet confDataSet;
@@ -245,7 +245,6 @@ namespace PP791
 
         private void btnDeleteItem_Click(object sender, EventArgs e)
         {
-
             if (listBoxConfig.SelectedItem == null) return;
 
             string configName = listBoxConfig.SelectedItem.ToString();
@@ -256,6 +255,112 @@ namespace PP791
             }
 
             listBoxConfig.Items.Remove(listBoxConfig.SelectedItem);
+        }
+
+        private void btnSetSelected_Click(object sender, EventArgs e)
+        {
+            if (listBoxConfig.SelectedItem == null) return;
+
+            List<string> dataObjectList = new List<string>();
+
+            // Build Data Stream
+            string configName = listBoxConfig.SelectedItem.ToString();
+            if (confDataSet.Tables.Contains(configName))
+            {
+                int idx = confDataSet.Tables.IndexOf(configName);         
+                foreach (DataRow row in confDataSet.Tables[idx].Rows)
+                {
+                    string dataObject = 
+                        row.ItemArray[1].ToString() + Convert.ToChar(0x1C).ToString() +
+                        row.ItemArray[2].ToString() + Convert.ToChar(0x1C).ToString() +
+                        row.ItemArray[3].ToString();
+
+                    //Console.WriteLine(dataObject.Length);
+
+                    dataObjectList.Add(dataObject);
+                }
+            }
+
+            string head = String.Empty;
+            if (configName.IndexOf("terminal", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                // Terminal config, use T51
+                head = "T51";
+            }
+            else
+            {
+                // Application config, use T55
+                head = "T55";
+            }
+
+            // Counting the number of total packages
+            //[prefixX][T][5][X][n][total]...(body)...[suffix][LRC]
+            int body_length = serialPort.GetWriteBufferSize() - 10;
+            int totalPackages = 0;
+
+            List<string> segmentList = new List<string>();
+
+            while (dataObjectList.Count > 0)
+            {
+                int currentLength = 0;
+                string segment = String.Empty;
+
+                while (currentLength + 1 + dataObjectList[0].Length <= body_length)
+                {
+                    segment += Convert.ToChar(0x1A).ToString() + dataObjectList[0];
+                    dataObjectList.RemoveAt(0);
+                    currentLength += segment.Length;
+
+                    if (dataObjectList.Count == 0)
+                        break;
+                }
+                segmentList.Add(segment);
+                totalPackages++;
+            }
+
+            // Sending messages
+            int pkg = 1;
+            while (segmentList.Count > 0)
+            {
+                Console.WriteLine($"Sending package {pkg} of {totalPackages}");
+                try
+                {
+
+                    byte[] res;
+                    serialPort.WriteAndReadMessage(PktType.STX, head + pkg.ToString() + totalPackages.ToString(), segmentList[0], 0, out res);
+
+
+
+                    string response = Encoding.ASCII.GetString(res);
+                    if (string.IsNullOrEmpty(response))
+                    {
+                        // No messages in Message Queue
+                        MessageBox.Show($"Error message: No return\n\n");
+                        break;
+                    }
+                    else if (response.IndexOf("T560", StringComparison.OrdinalIgnoreCase) < 0 && 
+                        response.IndexOf("T520", StringComparison.OrdinalIgnoreCase) < 0)
+                    {
+                        // fail
+                        MessageBox.Show($"Error11 message: {response}\n\n");
+                        //return;
+                        break;
+                    }
+                    else
+                    {
+                        // Success, sending next package if any
+                        MessageBox.Show($"Success: {response}\n\n");
+                        segmentList.RemoveAt(0);
+                        pkg++;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error77 message: {ex.Message}\n\n");
+                    break;
+                }
+            }
+
         }
     }
 }
